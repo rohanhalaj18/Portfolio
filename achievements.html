@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Achievements & Wins — NEBULA PROTOCOL</title>
+  <meta name="description" content="A record of triumphs across the digital cosmos." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+  <style>
+    .win-card {
+      background: var(--surface-mid);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform .3s, box-shadow .3s;
+    }
+    .win-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary-cont), var(--secondary));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .4s;
+    }
+    .win-card:hover::before { transform: scaleX(1); }
+    .win-card:hover { transform: translateY(-4px); box-shadow: 0 0 50px rgba(107,33,168,.2); }
+    .win-rank {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      opacity: .35;
+      position: absolute;
+      right: 1.5rem; top: 1rem;
+    }
+    .finalist-card {
+      background: rgba(14,14,14,.5);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      border: 1px solid rgba(76,68,82,.15);
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+      transition: border-color .3s, box-shadow .3s;
+    }
+    .finalist-card:hover { border-color: rgba(107,33,168,.3); box-shadow: 0 0 30px rgba(107,33,168,.1); }
+    .timeline-label {
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--outline);
+    }
+  </style>
+</head>
+<body>
+  <div id="scroll-progress"></div>
+  <div id="starfield"></div>
+  <div class="page-wrapper">
+
+    <nav class="main-nav">
+      <div class="nav-inner">
+        <a href="index.html" class="nav-logo">NEBULA<span>_PROTOCOL</span></a>
+        <ul class="nav-links">
+          <li><a href="index.html"        id="nav-home"><span class="material-icons">rocket_launch</span>Home</a></li>
+          <li><a href="projects.html"     id="nav-projects"><span class="material-icons">account_tree</span>Projects</a></li>
+          <li><a href="achievements.html" id="nav-wins"><span class="material-icons">military_tech</span>Wins</a></li>
+          <li><a href="contact.html"      id="nav-contact"><span class="material-icons">alternate_email</span>Connect</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+      </div>
+    </nav>
+
+    <div class="mobile-nav" id="mobile-nav">
+      <a href="index.html"><span class="material-icons">rocket_launch</span>Home</a>
+      <a href="projects.html"><span class="material-icons">account_tree</span>Projects</a>
+      <a href="achievements.html"><span class="material-icons">military_tech</span>Wins</a>
+      <a href="contact.html"><span class="material-icons">alternate_email</span>Connect</a>
+    </div>
+
+    <main>
+      <header class="page-header">
+        <div class="container">
+          <div class="section-label reveal"><span class="pulse-dot"></span>&nbsp; Transmission Incoming</div>
+          <h1 class="reveal delay-1">Achievements <span class="gradient-text">&amp; Wins</span></h1>
+          <p class="text-muted reveal delay-2" style="margin-top:1rem;">
+            A record of triumphs across the digital cosmos. From competitive codebases to
+            high-stakes hackathon final stages, we document the evolution of the nebula protocol.
+          </p>
+        </div>
+      </header>
+
+      <!-- STATS -->
+      <section class="section-sm" style="padding-top:0">
+        <div class="container">
+          <div class="card card-glass reveal" style="display:flex;flex-wrap:wrap;gap:2rem;padding:2rem 2.5rem;justify-content:space-around;text-align:center;">
+            <div><h2 class="gradient-text"><span class="counter" data-target="3" data-suffix="x">3x</span></h2><p class="text-muted" style="font-size:.8rem;margin-top:.25rem;">First Place</p></div>
+            <div><h2 class="gradient-text"><span class="counter" data-target="4" data-suffix="+">4+</span></h2><p class="text-muted" style="font-size:.8rem;margin-top:.25rem;">Global Finalist</p></div>
+            <div><h2 class="gradient-text"><span class="counter" data-target="8" data-suffix="+">8+</span></h2><p class="text-muted" style="font-size:.8rem;margin-top:.25rem;">Events Competed</p></div>
+            <div><h2 class="gradient-text"><span class="counter" data-target="15" data-suffix="k+">15k+</span></h2><p class="text-muted" style="font-size:.8rem;margin-top:.25rem;">Prize Pool Won</p></div>
+          </div>
+        </div>
+      </section>
+
+      <hr class="cosmic" />
+
+      <!-- FIRST PLACE WINS -->
+      <section class="section" id="wins-first">
+        <div class="container">
+          <div class="section-label reveal">Tier 1 // Grand Victories</div>
+          <h2 class="reveal delay-1" style="margin-bottom:2.5rem;">First Place <span class="gradient-text">Wins</span></h2>
+          <div class="grid grid-2">
+            <article class="win-card reveal delay-1" id="win-nebula-hack">
+              <span class="win-rank">01</span>
+              <div class="tag tag-cyan" style="width:fit-content;"><span class="pulse-dot"></span>&nbsp; Active</div>
+              <div class="timeline-label">ETH Global '24 // Best DeFi Infrastructure</div>
+              <h3>NEBULA_HACK</h3>
+              <p class="text-muted" style="font-size:.9rem;">Pioneered a decentralized cloud-storage protocol for orbital data transmission using zero-knowledge proofs. Global Deployments across six continents.</p>
+              <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem;">
+                <span class="tag">ZK Proofs</span><span class="tag">Solidity</span><span class="tag tag-cyan">DeFi</span>
+              </div>
+            </article>
+            <article class="win-card reveal delay-2" id="win-void-core">
+              <span class="win-rank">02</span>
+              <div class="tag" style="width:fit-content;"><span class="material-icons" style="font-size:.8rem;">military_tech</span>&nbsp; Winner</div>
+              <div class="timeline-label">HackTheSpace // Top Innovation Award</div>
+              <h3>VOID_CORE_V2</h3>
+              <p class="text-muted" style="font-size:.9rem;">Engineered a real-time visualization engine for multi-agent systems operating in low-latency environments. System Metrics redefined for orbital clusters.</p>
+              <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem;">
+                <span class="tag">Rust</span><span class="tag">Multi-agent</span><span class="tag tag-cyan">Real-time</span>
+              </div>
+            </article>
+            <article class="win-card reveal delay-3" id="win-polaris">
+              <span class="win-rank">03</span>
+              <div class="tag" style="width:fit-content;"><span class="material-icons" style="font-size:.8rem;">emoji_events</span>&nbsp; Winner</div>
+              <div class="timeline-label">Deep Space Jam // Best Integration</div>
+              <h3>POLARIS_SYNC</h3>
+              <p class="text-muted" style="font-size:.9rem;">Integrated cross-chain telemetry with autonomous spacecraft scheduling algorithms. Novel approach to mesh network integrity with 99.7% uptime.</p>
+              <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem;">
+                <span class="tag">Cross-chain</span><span class="tag">Telemetry</span><span class="tag tag-cyan">Mesh</span>
+              </div>
+            </article>
+            <div class="card card-glass reveal delay-4" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:1rem;">
+              <span class="material-icons animate-float" style="font-size:3rem;color:var(--secondary);opacity:.8;">emoji_events</span>
+              <h3>More to Come</h3>
+              <p class="text-muted" style="font-size:.9rem;">Currently competing in three upcoming global hackathons.</p>
+              <a href="contact.html" class="btn btn-primary" id="ach-cta-contact">Get in Touch</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <hr class="cosmic" />
+
+      <!-- FINALISTS -->
+      <section class="section" id="wins-finalist">
+        <div class="container">
+          <div class="section-label reveal">Tier 2 // Global Finalists</div>
+          <h2 class="reveal delay-1" style="margin-bottom:2.5rem;">Top <span class="gradient-text">Finalists</span></h2>
+          <div class="grid grid-2">
+            <article class="finalist-card reveal delay-1" id="finalist-quasar">
+              <div class="timeline-label">EtherGlobal // Top Finalist</div>
+              <h4>QUASAR_IO</h4>
+              <p class="text-muted" style="font-size:.88rem;">Top finalist for decentralized compute markets at EtherGlobal. Novel incentive structures for orbital node participation.</p>
+            </article>
+            <article class="finalist-card reveal delay-2" id="finalist-satnav">
+              <div class="timeline-label">NASA Open Data // Finalist</div>
+              <h4>SAT_NAV_PLUS</h4>
+              <p class="text-muted" style="font-size:.88rem;">Optimized planetary routing for logistics in the NASA Open Data challenge. 32% efficiency improvement over baseline.</p>
+            </article>
+            <article class="finalist-card reveal delay-3" id="finalist-orbit">
+              <div class="timeline-label">Cosmic Mesh Challenge // Finalist</div>
+              <h4>ORBIT_LINK</h4>
+              <p class="text-muted" style="font-size:.88rem;">Novel approach to mesh networks in high-interference cosmic zones. Demonstrated 99.7% uptime in simulated orbital disruption.</p>
+            </article>
+            <article class="finalist-card reveal delay-4" id="finalist-dark">
+              <div class="timeline-label">Meta-Hack // Best UX/UI</div>
+              <h4>DARK_MATTER</h4>
+              <p class="text-muted" style="font-size:.88rem;">Experimental UI for visualizing dark matter distribution maps. Awarded Best UX/UI for immersive data storytelling.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="main-footer">
+      <div class="footer-inner">
+        <a href="index.html" class="nav-logo" style="font-size:1.1rem;">NEBULA<span>_PROTOCOL</span></a>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="achievements.html">Wins</a></li>
+          <li><a href="contact.html">Connect</a></li>
+        </ul>
+        <p class="footer-copy">© 2024 NEBULA PROTOCOL. SHAPED IN THE VOID.</p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

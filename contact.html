@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — CELESTIAL_DEV | NEBULA PROTOCOL</title>
+  <meta name="description" content="Establish a connection across the digital expanse. Open to collaborations, hackathons, and cosmic engineering roles." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+  <style>
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+    .info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.5rem;
+      background: var(--surface-mid);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(76,68,82,.12);
+      transition: border-color .3s;
+    }
+    .info-item:hover { border-color: rgba(107,33,168,.3); }
+    .info-icon {
+      width: 40px; height: 40px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, var(--primary-cont), var(--tertiary-cont));
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .info-icon .material-icons { font-size: 1.2rem; color: var(--primary); }
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      padding: 1rem 1.5rem;
+      background: var(--surface-mid);
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(76,68,82,.15);
+      text-decoration: none;
+      color: var(--on-surface);
+      transition: border-color .3s, box-shadow .3s, transform .2s;
+      font-size: .9rem;
+      font-weight: 500;
+    }
+    .social-link:hover {
+      border-color: rgba(93,230,255,.3);
+      box-shadow: 0 0 25px rgba(93,230,255,.1);
+      transform: translateX(4px);
+      color: var(--secondary);
+    }
+  </style>
+</head>
+<body>
+  <div id="scroll-progress"></div>
+  <div id="starfield"></div>
+  <div class="page-wrapper">
+
+    <nav class="main-nav">
+      <div class="nav-inner">
+        <a href="index.html" class="nav-logo">NEBULA<span>_PROTOCOL</span></a>
+        <ul class="nav-links">
+          <li><a href="index.html"        id="nav-home"><span class="material-icons">rocket_launch</span>Home</a></li>
+          <li><a href="projects.html"     id="nav-projects"><span class="material-icons">account_tree</span>Projects</a></li>
+          <li><a href="achievements.html" id="nav-wins"><span class="material-icons">military_tech</span>Wins</a></li>
+          <li><a href="contact.html"      id="nav-contact"><span class="material-icons">alternate_email</span>Connect</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+      </div>
+    </nav>
+
+    <div class="mobile-nav" id="mobile-nav">
+      <a href="index.html"><span class="material-icons">rocket_launch</span>Home</a>
+      <a href="projects.html"><span class="material-icons">account_tree</span>Projects</a>
+      <a href="achievements.html"><span class="material-icons">military_tech</span>Wins</a>
+      <a href="contact.html"><span class="material-icons">alternate_email</span>Connect</a>
+    </div>
+
+    <main>
+      <header class="page-header">
+        <div class="container">
+          <div class="section-label reveal"><span class="pulse-dot"></span>&nbsp; Channel Open</div>
+          <h1 class="reveal delay-1">GET IN <span class="gradient-text">TOUCH</span></h1>
+          <p class="text-muted reveal delay-2" style="margin-top:1rem;">
+            Establishing a connection across the digital expanse. Whether it's a project inquiry
+            or a cosmic greeting, the channel is open.
+          </p>
+        </div>
+      </header>
+
+      <section class="section" style="padding-top:0" id="contact-main">
+        <div class="container">
+          <div class="contact-grid">
+
+            <!-- INFO COLUMN -->
+            <div style="display:flex;flex-direction:column;gap:1.5rem;">
+              <div class="section-label reveal">Origin Point</div>
+
+              <div class="info-item reveal delay-1" id="info-location">
+                <div class="info-icon"><span class="material-icons">location_on</span></div>
+                <div>
+                  <p style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--outline);margin-bottom:.25rem;">Location</p>
+                  <p style="font-weight:500;">San Francisco, Sector 7</p>
+                  <p class="text-muted" style="font-size:.85rem;">Digital Nomad — Earth Orbit</p>
+                </div>
+              </div>
+
+              <div class="info-item reveal delay-2" id="info-email">
+                <div class="info-icon"><span class="material-icons">alternate_email</span></div>
+                <div>
+                  <p style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--outline);margin-bottom:.25rem;">Active Stream</p>
+                  <p style="font-weight:500;">comms@nebula-protocol.dev</p>
+                  <p class="text-muted" style="font-size:.85rem;">Response within 24 orbital cycles</p>
+                </div>
+              </div>
+
+              <div class="info-item reveal delay-3" id="info-status">
+                <div class="info-icon" style="background:linear-gradient(135deg,rgba(93,230,255,.2),rgba(0,203,230,.2));">
+                  <span class="material-icons" style="color:var(--secondary);">wifi</span>
+                </div>
+                <div>
+                  <p style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--outline);margin-bottom:.25rem;">Status</p>
+                  <div style="display:flex;align-items:center;gap:.5rem;">
+                    <span class="pulse-dot"></span>
+                    <p style="font-weight:500;color:var(--secondary);">Open to Opportunities</p>
+                  </div>
+                  <p class="text-muted" style="font-size:.85rem;">Hackathons, full-time &amp; freelance</p>
+                </div>
+              </div>
+
+              <hr class="cosmic" style="margin:1rem 0" />
+
+              <!-- Social links -->
+              <div class="section-label reveal">Transmission Channels</div>
+              <div style="display:flex;flex-direction:column;gap:.75rem;">
+                <a href="https://github.com" target="_blank" class="social-link reveal delay-1" id="contact-github">
+                  <span class="material-icons" style="color:var(--primary);">code</span>
+                  GitHub
+                </a>
+                <a href="https://linkedin.com" target="_blank" class="social-link reveal delay-2" id="contact-linkedin">
+                  <span class="material-icons" style="color:var(--secondary);">share</span>
+                  LinkedIn
+                </a>
+                <a href="https://twitter.com" target="_blank" class="social-link reveal delay-3" id="contact-twitter">
+                  <span class="material-icons" style="color:var(--tertiary);">tag</span>
+                  Twitter / X
+                </a>
+              </div>
+            </div>
+
+            <!-- FORM COLUMN -->
+            <div class="card card-glass reveal delay-2" style="padding:2.5rem;">
+              <div class="section-label" style="margin-bottom:1.5rem;">Send A Transmission</div>
+              <form id="contact-form" novalidate style="display:flex;flex-direction:column;gap:1.5rem;">
+                <div class="grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+                  <div class="form-group" id="form-name-group">
+                    <label for="contact-name">Name</label>
+                    <input type="text" id="contact-name" name="name" placeholder="Your callsign" required />
+                  </div>
+                  <div class="form-group" id="form-email-group">
+                    <label for="contact-email">Email</label>
+                    <input type="email" id="contact-email" name="email" placeholder="you@domain.com" required />
+                  </div>
+                </div>
+                <div class="form-group" id="form-subject-group">
+                  <label for="contact-subject">Subject</label>
+                  <input type="text" id="contact-subject" name="subject" placeholder="Transmission subject" />
+                </div>
+                <div class="form-group" id="form-message-group">
+                  <label for="contact-message">Message</label>
+                  <textarea id="contact-message" name="message" placeholder="Describe your mission parameters…" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" id="contact-submit" style="width:100%;justify-content:center;">
+                  <span class="material-icons" style="font-size:1rem;">send</span>
+                  Send Transmission
+                </button>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="main-footer">
+      <div class="footer-inner">
+        <a href="index.html" class="nav-logo" style="font-size:1.1rem;">NEBULA<span>_PROTOCOL</span></a>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="achievements.html">Wins</a></li>
+          <li><a href="contact.html">Connect</a></li>
+        </ul>
+        <p class="footer-copy">© 2024 NEBULA PROTOCOL. SHAPED IN THE VOID.</p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+  <script>
+    // Responsive form grid on mobile
+    if (window.innerWidth < 540) {
+      const twoCol = document.querySelector('.grid-2');
+      if (twoCol) twoCol.style.gridTemplateColumns = '1fr';
+    }
+  </script>
+</body>
+</html>
