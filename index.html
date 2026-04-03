@@ -3,1427 +3,340 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>THE OBSERVER — Cosmic Portfolio</title>
-  <meta name="description" content="The Ethereal Observer — Cosmic Engineer crafting high-frequency solutions." />
+  <title>Rohan Halaj — AI & Web Developer Portfolio</title>
+  <meta name="description" content="Rohan Halaj — AI, Agentic Automation, and Web Developer. Building the next generation of digital products." />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-  <style>
-    /* ══════════════════════════════════════════════
-       INTRO / MOON LANDING SEQUENCE
-    ══════════════════════════════════════════════ */
-    #intro-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 10000;
-      background: #03040a;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      overflow: hidden;
-      transition: opacity .9s ease;
-    }
-    #intro-overlay.fade-out { opacity: 0; pointer-events: none; }
-
-    #intro-stars {
-      position: absolute;
-      inset: 0;
-    }
-
-    /* Nebula glow in intro */
-    #intro-overlay::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 60% 50% at 50% 40%, rgba(107,33,168,.35) 0%, transparent 60%),
-        radial-gradient(ellipse 40% 30% at 20% 70%, rgba(93,230,255,.10) 0%, transparent 55%);
-      z-index: 0;
-    }
-
-    .intro-moon-scene {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      max-width: 100%;
-      text-align: center;
-      transform: translateY(110%);
-      animation: moonRise 1.8s cubic-bezier(.22,1,.36,1) 0.4s forwards;
-    }
-    @keyframes moonRise {
-      to { transform: translateY(0); }
-    }
-
-    /* Moon surface SVG container */
-    .moon-svg-wrap { position: relative; display: inline-block; width: 100%; }
-
-    /* Flag text below moon */
-    .intro-flag-name {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2rem, 6vw, 4rem);
-      font-weight: 700;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-      background: linear-gradient(90deg, #dfb7ff, #5de6ff, #ff9fee, #dfb7ff);
-      background-size: 300% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      opacity: 0;
-      animation:
-        nameReveal .9s ease 2.3s forwards,
-        nameShimmer 2.5s linear 2.8s infinite;
-      display: block;
-      padding-bottom: .3rem;
-      text-shadow: none;
-      position: relative;
-    }
-    /* Glow layer behind name */
-    .intro-flag-name::after {
-      content: 'ROHAN HALAJ';
-      position: absolute;
-      inset: 0;
-      font-size: inherit;
-      letter-spacing: inherit;
-      text-transform: inherit;
-      -webkit-text-fill-color: transparent;
-      background: linear-gradient(90deg, #dfb7ff, #5de6ff, #dfb7ff);
-      background-size: 300% auto;
-      -webkit-background-clip: text;
-      background-clip: text;
-      filter: blur(18px);
-      opacity: .6;
-      animation: nameShimmer 2.5s linear 2.8s infinite;
-      pointer-events: none;
-    }
-    @keyframes nameReveal {
-      from { opacity: 0; transform: translateY(10px) scale(.95); }
-      to   { opacity: 1; transform: translateY(0)  scale(1); }
-    }
-    @keyframes nameShimmer {
-      to { background-position: 200% center; }
-    }
-
-    .intro-sub {
-      font-family: 'Inter', sans-serif;
-      font-size: .75rem;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      color: rgba(93,230,255,.7);
-      opacity: 0;
-      animation: nameReveal .6s ease 2.9s forwards;
-      margin-top: .3rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .intro-skip {
-      position: absolute;
-      bottom: 1.5rem;
-      right: 2rem;
-      z-index: 2;
-      background: rgba(255,255,255,.05);
-      border: 1px solid rgba(255,255,255,.12);
-      color: rgba(255,255,255,.4);
-      font-family: 'Inter', sans-serif;
-      font-size: .72rem;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      padding: .4rem 1rem;
-      border-radius: 999px;
-      cursor: pointer;
-      transition: color .2s, border-color .2s;
-    }
-    .intro-skip:hover { color: #dfb7ff; border-color: rgba(223,183,255,.4); }
-
-    /* Rocket engine burst at launch */
-    @keyframes thrusterBurn {
-      0%,100% { transform: scaleY(1);   opacity: .9; }
-      50%      { transform: scaleY(1.5); opacity: 1; }
-    }
-    @keyframes rocketLaunch {
-      0%   { transform: translateX(-50%) translateY(0); }
-      100% { transform: translateX(-50%) translateY(-120vh); }
-    }
-
-    /* ══════════════════════════════════════════════
-       ROCKET SCROLLBAR
-    ══════════════════════════════════════════════ */
-    ::-webkit-scrollbar       { width: 10px; }
-    ::-webkit-scrollbar-track {
-      background: #09090f;
-      border-left: 1px solid rgba(107,33,168,.12);
-    }
-    ::-webkit-scrollbar-thumb {
-      background: linear-gradient(180deg, #6b21a8, #dfb7ff, #5de6ff);
-      border-radius: 999px;
-      border: 2px solid #09090f;
-    }
-    ::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, #9333ea, #fff, #00cbe6); }
-
-    #rocket-scroller {
-      position: fixed;
-      right: 13px;
-      top: 8px;
-      z-index: 9998;
-      pointer-events: none;
-      transform-origin: center center;
-      transition: top .03s linear, transform .4s cubic-bezier(.34,1.56,.64,1);
-      filter: drop-shadow(0 0 10px rgba(223,183,255,.85)) drop-shadow(0 0 20px rgba(107,33,168,.5));
-    }
-
-    /* ══════════════════════════════════════════════
-       CANVAS & BACKGROUND
-    ══════════════════════════════════════════════ */
-    #space-canvas {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    /* ══════════════════════════════════════════════
-       HERO LAYOUT
-    ══════════════════════════════════════════════ */
-    .hero-section {
-      padding: 10rem 0 6rem;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero-left {
-      max-width: 540px;
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-    }
-
-    /* ── Floating Astronaut (solo) ── */
-    .astronaut-scene {
-      position: absolute;
-      right: 3%;
-      top: 50%;
-      width: min(400px, 40vw);
-      pointer-events: none;
-      z-index: 2;
-      transform: translateY(-52%);
-      animation: astroDrift 8s ease-in-out infinite;
-    }
-    @keyframes astroDrift {
-      0%,100% { transform: translateY(-52%) rotate(-1.5deg); }
-      33%      { transform: translateY(-60%) rotate(1deg) translateX(8px); }
-      66%      { transform: translateY(-56%) rotate(-.5deg) translateX(-5px); }
-    }
-
-    /* Scroll hint */
-    .scroll-hint {
-      position: absolute;
-      bottom: 2rem;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: .4rem;
-      opacity: .4;
-      animation: scrollBounce 2s ease-in-out infinite;
-      font-size: .65rem;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--on-surface-var);
-    }
-    @keyframes scrollBounce {
-      0%,100% { transform: translateX(-50%) translateY(0); }
-      50%      { transform: translateX(-50%) translateY(7px); }
-    }
-
-    /* Asteroid belt */
-    .asteroid-belt {
-      position: fixed;
-      bottom: 10%;
-      left: 0;
-      width: 100%;
-      height: 1px;
-      z-index: 1;
-      pointer-events: none;
-      opacity: .25;
-      background: repeating-linear-gradient(
-        90deg,
-        transparent 0px, transparent 18px,
-        rgba(223,183,255,.8) 18px, rgba(223,183,255,.8) 20px
-      );
-      animation: beltDrift 50s linear infinite;
-    }
-    @keyframes beltDrift { from { background-position: 0; } to { background-position: 2000px 0; } }
-
-    @media (max-width: 900px) {
-      .astronaut-scene { display: none; }
-      .hero-left { max-width: 100%; }
-    }
-  </style>
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════════════════
-     MOON LANDING INTRO OVERLAY
-═══════════════════════════════════════════════════ -->
-<div id="intro-overlay" role="dialog" aria-label="Intro sequence">
-  <!-- Meteor clash canvas - continuous collisions in background -->
-  <canvas id="intro-clash-canvas" style="position:absolute;inset:0;z-index:0;"></canvas>
+<!-- Ambient background elements -->
+<div id="bg-grid" aria-hidden="true"></div>
+<div class="orb orb-blue" aria-hidden="true"></div>
+<div class="orb orb-lime" aria-hidden="true"></div>
 
-  <div class="intro-moon-scene" id="moon-scene">
-    <!-- Moon + Astronaut SVG — LARGE VERSION -->
-    <svg id="moon-svg" viewBox="0 0 1000 480" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%" style="display:block;">
-      <defs>
-        <radialGradient id="moonGrad" cx="38%" cy="32%" r="62%">
-          <stop offset="0%"   stop-color="#f0ece0"/>
-          <stop offset="30%"  stop-color="#d8d2be"/>
-          <stop offset="65%"  stop-color="#b8b09a"/>
-          <stop offset="100%" stop-color="#7a7460"/>
-        </radialGradient>
-        <radialGradient id="craterGrad" cx="40%" cy="35%" r="60%">
-          <stop offset="0%"   stop-color="rgba(100,95,80,0)"/>
-          <stop offset="75%"  stop-color="rgba(80,75,60,.2)"/>
-          <stop offset="100%" stop-color="rgba(50,45,35,.6)"/>
-        </radialGradient>
-        <linearGradient id="suitG" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#e8e8f0"/>
-          <stop offset="100%" stop-color="#b0b4c8"/>
-        </linearGradient>
-        <linearGradient id="visorG" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="rgba(93,230,255,.6)"/>
-          <stop offset="100%" stop-color="rgba(107,33,168,.7)"/>
-        </linearGradient>
-        <linearGradient id="flagGradDef" x1="0" y1="0" x2="1" y2=".5">
-          <stop offset="0%"   stop-color="#6b21a8"/>
-          <stop offset="45%"  stop-color="#9333ea"/>
-          <stop offset="100%" stop-color="#00cbe6"/>
-        </linearGradient>
-        <filter id="moonGlow" x="-20%" y="-20%" width="140%" height="140%">
-          <feGaussianBlur stdDeviation="14" result="b"/>
-          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-        <filter id="flagGlow" x="-30%" y="-30%" width="160%" height="160%">
-          <feGaussianBlur stdDeviation="5" result="b"/>
-          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-        <filter id="flagTextGlow" x="-20%" y="-50%" width="140%" height="200%">
-          <feGaussianBlur stdDeviation="4" result="b"/>
-          <feFlood flood-color="#5de6ff" flood-opacity=".5" result="c"/>
-          <feComposite in="c" in2="b" operator="in" result="glow"/>
-          <feMerge><feMergeNode in="glow"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-        <filter id="astroGlow" x="-15%" y="-15%" width="130%" height="130%">
-          <feGaussianBlur stdDeviation="4" result="b"/>
-          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-      </defs>
+<!-- Scroll progress -->
+<div id="scroll-progress" role="progressbar" aria-label="Page scroll progress"></div>
 
-      <!-- ══ BIG MOON SURFACE ══ -->
-      <!-- Wide atmosphere halo -->
-      <ellipse cx="500" cy="700" rx="560" ry="530" fill="rgba(230,210,255,.05)" filter="url(#moonGlow)"/>
-      <!-- Main moon body — huge half disc -->
-      <ellipse cx="500" cy="720" rx="530" ry="480" fill="url(#moonGrad)"/>
-      <!-- Surface shading -->
-      <ellipse cx="500" cy="720" rx="530" ry="480" fill="url(#craterGrad)"/>
-
-      <!-- Large craters -->
-      <circle cx="180" cy="380" r="55" fill="rgba(120,115,96,.22)" stroke="rgba(150,145,122,.28)" stroke-width="2"/>
-      <circle cx="192" cy="376" r="32" fill="rgba(100,95,78,.18)"/>
-      <circle cx="830" cy="360" r="42" fill="rgba(120,115,96,.2)"  stroke="rgba(150,145,122,.24)" stroke-width="2"/>
-      <circle cx="840" cy="356" r="24" fill="rgba(100,95,78,.15)"/>
-      <circle cx="60"  cy="415" r="28" fill="rgba(120,115,96,.18)"/>
-      <circle cx="940" cy="400" r="35" fill="rgba(120,115,96,.2)"  stroke="rgba(150,145,122,.2)"  stroke-width="2"/>
-      <circle cx="380" cy="340" r="22" fill="rgba(120,115,96,.16)"/>
-      <circle cx="640" cy="330" r="18" fill="rgba(120,115,96,.14)"/>
-      <circle cx="750" cy="395" r="14" fill="rgba(120,115,96,.15)"/>
-      <circle cx="280" cy="410" r="12" fill="rgba(120,115,96,.14)"/>
-
-      <!-- Surface rocks/pebbles -->
-      <ellipse cx="430" cy="348" rx="10" ry="5"  fill="rgba(170,162,145,.45)" transform="rotate(-12 430 348)"/>
-      <ellipse cx="580" cy="342" rx="8"  ry="4"  fill="rgba(170,162,145,.4)"  transform="rotate(8 580 342)"/>
-      <ellipse cx="330" cy="355" rx="6"  ry="3"  fill="rgba(170,162,145,.35)" transform="rotate(-6 330 355)"/>
-      <ellipse cx="680" cy="350" rx="9"  ry="4.5" fill="rgba(170,162,145,.38)" transform="rotate(5 680 350)"/>
-      <!-- Footprints trail -->
-      <ellipse cx="480" cy="353" rx="8" ry="5" fill="rgba(100,95,76,.5)" transform="rotate(-15 480 353)"/>
-      <ellipse cx="497" cy="348" rx="8" ry="5" fill="rgba(100,95,76,.5)" transform="rotate(10 497 348)"/>
-      <ellipse cx="515" cy="345" rx="8" ry="5" fill="rgba(100,95,76,.45)" transform="rotate(-5 515 345)"/>
-      <ellipse cx="532" cy="342" rx="8" ry="5" fill="rgba(100,95,76,.4)"  transform="rotate(8 532 342)"/>
-
-      <!-- ══ BIG FLAG ══ -->
-      <g id="flag-group" opacity="0">
-        <!-- Pole — tall and thick -->
-        <line x1="330" y1="80" x2="330" y2="355" stroke="#d0d4e0" stroke-width="6" stroke-linecap="round"/>
-        <!-- Pole cap -->  
-        <circle cx="330" cy="80" r="6" fill="#dfb7ff"/>
-        <!-- Flag fabric — large (animated by JS) -->
-        <path id="flag-wave"
-              d="M 330 84 Q 370 76 415 88 Q 458 100 504 92 L 504 152 Q 458 160 415 148 Q 370 136 330 144 Z"
-              fill="url(#flagGradDef)" filter="url(#flagGlow)"/>
-        <!-- Fabric sheen overlay (also animated) -->
-        <path id="flag-sheen"
-              d="M 340 88 Q 370 80 410 90 Q 440 98 490 93"
-              stroke="rgba(255,255,255,.18)" stroke-width="2" fill="none"/>
-        <!-- Flag text — given id so JS can wave it too -->
-        <text id="flag-text" x="417" y="124" font-size="26" fill="white" text-anchor="middle"
-              font-family="'Space Grotesk', sans-serif" font-weight="700" letter-spacing="3.5"
-              filter="url(#flagTextGlow)" opacity=".98">ROHAN HALAJ</text>
-        <!-- Decorative stars — also given ids -->
-        <text id="flag-star-l" x="344" y="108" font-size="10" fill="rgba(255,255,255,.55)" text-anchor="middle">✦</text>
-        <text id="flag-star-r" x="490" y="108" font-size="10" fill="rgba(255,255,255,.55)" text-anchor="middle">✦</text>
-        <!-- Pole base ground plate -->
-        <ellipse cx="330" cy="355" rx="12" ry="6" fill="#b0b4c0"/>
-      </g>
-
-      <!-- ══ ASTRONAUT (standing on moon) ══ -->
-      <g id="astronaut-stand" transform="translate(600, 200) scale(1.35)">
-        <!-- Legs -->
-        <path d="M -14 55 L -18 90" stroke="url(#suitG)" stroke-width="16" stroke-linecap="round" fill="none"/>
-        <path d="M  14 55 L  18 90" stroke="url(#suitG)" stroke-width="16" stroke-linecap="round" fill="none"/>
-        <!-- Boots -->
-        <ellipse cx="-20" cy="96" rx="14" ry="7" fill="#8c8fa0" transform="rotate(-5 -20 96)"/>
-        <ellipse cx=" 20" cy="96" rx="14" ry="7" fill="#8c8fa0" transform="rotate( 5  20 96)"/>
-        <!-- Torso -->
-        <rect x="-24" y="0" width="48" height="60" rx="17" fill="url(#suitG)"/>
-        <!-- Chest panel -->
-        <rect x="-15" y="12" width="30" height="20" rx="5" fill="#1565c0" opacity=".65"/>
-        <text x="0" y="26" font-size="7" fill="white" text-anchor="middle"
-              font-family="'Space Grotesk', sans-serif" font-weight="700">NASA</text>
-        <!-- Left arm raised toward flag -->
-        <path d="M -24 12 Q -55 18 -68 38" stroke="url(#suitG)" stroke-width="16" stroke-linecap="round" fill="none"/>
-        <circle cx="-70" cy="44" r="11" fill="#c8ccd8"/>
-        <circle cx="-70" cy="44" r="7"  fill="#9fa3b0"/>
-        <!-- Right arm — WAVING (animated group) -->
-        <g id="wave-arm">
-          <path d="M 24 10 Q 52 -2 60 -20" stroke="url(#suitG)" stroke-width="16" stroke-linecap="round" fill="none"/>
-          <circle cx="62" cy="-26" r="11" fill="#c8ccd8"/>
-          <circle cx="62" cy="-26" r="7"  fill="#9fa3b0"/>
-        </g>
-        <!-- Backpack -->
-        <rect x="19" y="6" width="16" height="34" rx="6" fill="#c0c4d0"/>
-        <!-- Helmet -->
-        <circle cx="0" cy="-30" r="42" fill="url(#suitG)" opacity=".96" filter="url(#astroGlow)"/>
-        <ellipse cx="0" cy="-27" rx="29" ry="27" fill="url(#visorG)"/>
-        <ellipse cx="-12" cy="-38" rx="8" ry="5" fill="white" opacity=".2" transform="rotate(-22 -12 -38)"/>
-        <!-- Stars in visor reflection -->
-        <circle cx="-4" cy="-22" r="1.5" fill="white" opacity=".5"/>
-        <circle cx="8"  cy="-32" r="1"   fill="white" opacity=".4"/>
-        <circle cx="0" cy="-30" r="42" fill="none" stroke="#dde0ec" stroke-width="5"/>
-        <rect x="-16" y="5" width="32" height="10" rx="5" fill="#c0c4d4"/>
-
-        <!-- ══ SPEECH BUBBLE (cloud style) ══ -->
-        <g id="speech-bubble" opacity="0" transform="translate(52, -115)">
-          <!-- Cloud bumps (layered circles for fluffy look) -->
-          <circle cx="30"  cy="38" r="20" fill="rgba(14,14,22,.92)" stroke="rgba(223,183,255,.55)" stroke-width="1.5"/>
-          <circle cx="54"  cy="28" r="24" fill="rgba(14,14,22,.92)" stroke="rgba(223,183,255,.55)" stroke-width="1.5"/>
-          <circle cx="82"  cy="24" r="22" fill="rgba(14,14,22,.92)" stroke="rgba(223,183,255,.55)" stroke-width="1.5"/>
-          <circle cx="108" cy="28" r="24" fill="rgba(14,14,22,.92)" stroke="rgba(223,183,255,.55)" stroke-width="1.5"/>
-          <circle cx="132" cy="36" r="20" fill="rgba(14,14,22,.92)" stroke="rgba(223,183,255,.55)" stroke-width="1.5"/>
-          <!-- Flat bottom fill -->
-          <rect x="12" y="38" width="138" height="36" fill="rgba(14,14,22,.92)"/>
-          <rect x="14" y="39" width="134" height="32" fill="rgba(14,14,22,.92)"/>
-          <line x1="14"  y1="72" x2="148" y2="72" stroke="rgba(223,183,255,.55)" stroke-width="1.5"/>
-          <!-- Bubble tail (pointing down-left toward helmet) -->
-          <polygon points="28,70 10,90 42,70" fill="rgba(14,14,22,.92)"/>
-          <line x1="28" y1="70" x2="10" y2="90"  stroke="rgba(223,183,255,.55)" stroke-width="1.5"/>
-          <line x1="42" y1="70" x2="10" y2="90"  stroke="rgba(14,14,22,.92)" stroke-width="3"/>
-          <!-- Typed message text -->
-          <text id="bubble-line1" x="80" y="52" font-size="11" fill="#5de6ff" text-anchor="middle"
-                font-family="'Space Grotesk', sans-serif" font-weight="700" letter-spacing="1"></text>
-          <text id="bubble-line2" x="80" y="66" font-size="8.5" fill="rgba(223,183,255,.85)" text-anchor="middle"
-                font-family="'Inter', sans-serif" letter-spacing=".5"></text>
-        </g>
-      </g>
-
-      <!-- Background stars in SVG -->
-      <circle cx="50"  cy="30"  r="2"   fill="white" opacity=".6"/>
-      <circle cx="150" cy="15"  r="1.5" fill="white" opacity=".5"/>
-      <circle cx="850" cy="40"  r="2.2" fill="white" opacity=".7"/>
-      <circle cx="920" cy="110" r="1.5" fill="white" opacity=".5"/>
-      <circle cx="30"  cy="220" r="2"   fill="white" opacity=".4"/>
-      <circle cx="970" cy="250" r="1.5" fill="white" opacity=".5"/>
-      <circle cx="120" cy="175" r="2.5" fill="white" opacity=".4"/>
-      <circle cx="780" cy="160" r="1.5" fill="white" opacity=".45"/>
-    </svg>
-
-    <!-- Name & sub below moon -->
-    <span class="intro-flag-name" id="intro-name">ROHAN HALAJ</span>
-    <span class="intro-sub">// Cosmic Engineer // Landed</span>
+<!-- ═══ NAV ═══ -->
+<nav class="main-nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo" id="nav-logo">ROHAN<span>.DEV</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html" id="nav-home" class="active"><span class="material-icons">home</span>Home</a></li>
+      <li><a href="projects.html" id="nav-projects"><span class="material-icons">code</span>Projects</a></li>
+      <li><a href="achievements.html" id="nav-wins"><span class="material-icons">military_tech</span>Wins</a></li>
+      <li><a href="contact.html" id="nav-contact"><span class="material-icons">alternate_email</span>Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
   </div>
+</nav>
 
-  <button class="intro-skip" id="intro-skip" aria-label="Skip intro">Skip →</button>
-</div>
-
-
-<!-- ═══════════════════════════════════════════════════
-     MAIN SITE
-═══════════════════════════════════════════════════ -->
-<div id="scroll-progress"></div>
-<canvas id="space-canvas"></canvas>
-<div id="starfield"></div>
-<div class="asteroid-belt" aria-hidden="true"></div>
-
-<!-- ROCKET SCROLLBAR -->
-<div id="rocket-scroller" aria-hidden="true">
-  <svg id="rocket-svg" width="26" height="50" viewBox="0 0 26 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <!-- Nose cone -->
-    <polygon points="13,2 6,18 20,18" fill="#dfb7ff"/>
-    <!-- Body -->
-    <rect x="8" y="17" width="10" height="18" rx="3" fill="url(#rocketBodyGrad)"/>
-    <!-- Window -->
-    <circle cx="13" cy="24" r="3.5" fill="url(#visorG2)" stroke="rgba(223,183,255,.5)" stroke-width="1"/>
-    <!-- Fins left -->
-    <polygon points="8,28 2,42 8,35" fill="#6b21a8"/>
-    <!-- Fins right -->
-    <polygon points="18,28 24,42 18,35" fill="#6b21a8"/>
-    <!-- Nozzle -->
-    <rect x="10" y="34" width="6" height="6" rx="2" fill="#4a4060"/>
-    <!-- Flame -->
-    <ellipse cx="13" cy="43" rx="5" ry="5" fill="#ff9900" opacity=".85">
-      <animate attributeName="ry" values="5;8;5;4;7;5" dur=".35s" repeatCount="indefinite"/>
-      <animate attributeName="opacity" values=".85;1;.7;.9;.8;.85" dur=".35s" repeatCount="indefinite"/>
-    </ellipse>
-    <ellipse cx="13" cy="45" rx="3" ry="4" fill="#ffee55" opacity=".7">
-      <animate attributeName="ry" values="4;6;3;5;4" dur=".28s" repeatCount="indefinite"/>
-    </ellipse>
-    <defs>
-      <linearGradient id="rocketBodyGrad" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stop-color="#e0e0f0"/>
-        <stop offset="100%" stop-color="#9090b0"/>
-      </linearGradient>
-      <radialGradient id="visorG2" cx="35%" cy="35%" r="65%">
-        <stop offset="0%" stop-color="rgba(93,230,255,.7)"/>
-        <stop offset="100%" stop-color="rgba(107,33,168,.8)"/>
-      </radialGradient>
-    </defs>
-  </svg>
+<!-- Mobile Nav -->
+<div class="mobile-nav" id="mobile-nav" role="dialog" aria-label="Mobile navigation">
+  <a href="index.html"><span class="material-icons">home</span>Home</a>
+  <a href="projects.html"><span class="material-icons">code</span>Projects</a>
+  <a href="achievements.html"><span class="material-icons">military_tech</span>Wins</a>
+  <a href="contact.html"><span class="material-icons">alternate_email</span>Contact</a>
 </div>
 
 <div class="page-wrapper">
 
-  <!-- NAV -->
-  <nav class="main-nav" role="navigation" aria-label="Main navigation">
-    <div class="nav-inner">
-      <a href="index.html" class="nav-logo" id="nav-logo">NEBULA<span>_PROTOCOL</span></a>
-      <ul class="nav-links">
-        <li><a href="index.html"        id="nav-home"><span class="material-icons">rocket_launch</span>Home</a></li>
-        <li><a href="projects.html"     id="nav-projects"><span class="material-icons">account_tree</span>Projects</a></li>
-        <li><a href="achievements.html" id="nav-wins"><span class="material-icons">military_tech</span>Wins</a></li>
-        <li><a href="contact.html"      id="nav-contact"><span class="material-icons">alternate_email</span>Connect</a></li>
-      </ul>
-      <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </nav>
-
-  <!-- MOBILE NAV -->
-  <div class="mobile-nav" id="mobile-nav" role="dialog" aria-label="Mobile navigation">
-    <a href="index.html"><span class="material-icons">rocket_launch</span>Home</a>
-    <a href="projects.html"><span class="material-icons">account_tree</span>Projects</a>
-    <a href="achievements.html"><span class="material-icons">military_tech</span>Wins</a>
-    <a href="contact.html"><span class="material-icons">alternate_email</span>Connect</a>
-  </div>
-
-  <!-- HERO -->
+  <!-- ═══ HERO ═══ -->
   <main>
     <section class="hero-section" id="hero">
-      <div class="container" style="position:relative;">
-
-        <!-- LEFT text -->
-        <div class="hero-left">
-          <div class="section-label animate-fadeUp"><span class="pulse-dot"></span>&nbsp; Active Transmission</div>
-          <h1 class="animate-fadeUp delay-1">
-            <span class="gradient-text">THE OBSERVER</span><br>
-            Cosmic Engineer
-          </h1>
-          <p id="hero-type" class="text-muted animate-fadeUp delay-2" style="font-size:1.05rem;line-height:1.85;min-height:3.6rem;border-right:2px solid transparent;"></p>
-          <div class="flex gap-2 animate-fadeUp delay-3" style="flex-wrap:wrap;">
-            <a href="projects.html" class="btn btn-primary" id="hero-cta-projects">
-              <span class="material-icons" style="font-size:1rem;">account_tree</span>View Projects
-            </a>
-            <a href="contact.html" class="btn btn-secondary" id="hero-cta-contact">
-              <span class="material-icons" style="font-size:1rem;">alternate_email</span>Connect
-            </a>
-          </div>
-          <div class="flex gap-2 animate-fadeUp delay-4" style="flex-wrap:wrap;">
-            <a href="https://github.com" target="_blank" class="btn btn-ghost" id="hero-github">
-              <span class="material-icons" style="font-size:1rem;">code</span>GitHub
-            </a>
-            <a href="https://linkedin.com" target="_blank" class="btn btn-ghost" id="hero-linkedin">
-              <span class="material-icons" style="font-size:1rem;">share</span>LinkedIn
-            </a>
-          </div>
-        </div>
-
-        <!-- RIGHT: Solo floating astronaut (no Earth) -->
-        <div class="astronaut-scene" aria-label="Floating astronaut in space" role="img">
-          <svg viewBox="0 0 340 420" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%">
-            <defs>
-              <linearGradient id="as1" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#e8e8f0"/>
-                <stop offset="100%" stop-color="#b0b4c8"/>
-              </linearGradient>
-              <linearGradient id="av1" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="rgba(93,230,255,.5)"/>
-                <stop offset="100%" stop-color="rgba(107,33,168,.65)"/>
-              </linearGradient>
-              <filter id="astGlow">
-                <feGaussianBlur stdDeviation="5" result="b"/>
-                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-              </filter>
-              <radialGradient id="auraGrad" cx="50%" cy="50%" r="50%">
-                <stop offset="0%"   stop-color="rgba(107,33,168,.2)"/>
-                <stop offset="100%" stop-color="transparent"/>
-              </radialGradient>
-            </defs>
-
-            <!-- Ambient aura glow -->
-            <circle cx="170" cy="210" r="140" fill="url(#auraGrad)"/>
-
-            <!-- Tether -->
-            <path d="M 220 310 Q 245 350 260 390" stroke="rgba(223,183,255,.4)" stroke-width="1.5" stroke-dasharray="5 4"/>
-
-            <!-- ── BACKPACK ── -->
-            <rect x="207" y="205" width="42" height="55" rx="8" fill="#bcc0cc"/>
-            <rect x="211" y="213" width="34" height="10" rx="3" fill="#9fa3b0"/>
-            <rect x="211" y="226" width="15" height="7"  rx="2" fill="#5de6ff" opacity=".6"/>
-
-            <!-- ── TORSO ── -->
-            <rect x="200" y="185" width="68" height="80" rx="20" fill="url(#as1)"/>
-            <!-- Chest badge -->
-            <rect x="217" y="200" width="34" height="22" rx="5" fill="#1565c0" opacity=".65"/>
-            <text x="234" y="215" font-size="7" fill="white" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-weight="700">NASA</text>
-            <!-- Oxygen connector -->
-            <path d="M 250 200 Q 265 210 268 220" stroke="#5de6ff" stroke-width="3.5" stroke-linecap="round" fill="none" opacity=".65"/>
-
-            <!-- ── LEFT ARM (stretched toward "horizon") ── -->
-            <path d="M 200 200 Q 158 230 140 272" stroke="url(#as1)" stroke-width="22" stroke-linecap="round" fill="none"/>
-            <circle cx="138" cy="278" r="13" fill="#c8ccd8"/>
-            <circle cx="138" cy="278" r="8"  fill="#9fa3b0"/>
-
-            <!-- ── RIGHT ARM (floats up and out) ── -->
-            <path d="M 268 195 Q 300 178 318 158" stroke="url(#as1)" stroke-width="22" stroke-linecap="round" fill="none"/>
-            <circle cx="320" cy="154" r="13" fill="#c8ccd8"/>
-            <circle cx="320" cy="154" r="8"  fill="#9fa3b0"/>
-
-            <!-- ── LEGS (floating, slightly bent) ── -->
-            <path d="M 215 261 Q 205 296 198 325" stroke="url(#as1)" stroke-width="22" stroke-linecap="round" fill="none"/>
-            <path d="M 252 261 Q 262 296 268 325" stroke="url(#as1)" stroke-width="22" stroke-linecap="round" fill="none"/>
-            <!-- Boots -->
-            <ellipse cx="196" cy="332" rx="17" ry="9"  fill="#8c8fa0" transform="rotate(-12 196 332)"/>
-            <ellipse cx="269" cy="332" rx="17" ry="9"  fill="#8c8fa0" transform="rotate( 12 269 332)"/>
-
-            <!-- ── HELMET ── -->
-            <circle cx="235" cy="152" r="54" fill="url(#as1)" filter="url(#astGlow)"/>
-            <!-- Visor -->
-            <ellipse cx="235" cy="155" rx="38" ry="35" fill="url(#av1)"/>
-            <!-- Visor shine -->
-            <ellipse cx="218" cy="142" rx="9" ry="5" fill="white" opacity=".18" transform="rotate(-25 218 142)"/>
-            <!-- Stars reflected in visor -->
-            <circle cx="230" cy="148" r="1.5" fill="white" opacity=".55"/>
-            <circle cx="245" cy="160" r="1"   fill="white" opacity=".4"/>
-            <circle cx="225" cy="165" r="1"   fill="white" opacity=".35"/>
-            <!-- Helmet ring -->
-            <circle cx="235" cy="152" r="54" fill="none" stroke="#dde0ec" stroke-width="5"/>
-            <!-- Neck ring -->
-            <rect x="215" y="198" width="40" height="10" rx="5" fill="#c0c4d4"/>
-
-            <!-- Floating tools/debris -->
-            <!-- Mini satellite  -->
-            <g transform="translate(75,120) rotate(20)" opacity=".75">
-              <rect x="-5" y="-7" width="10" height="14" rx="2" fill="#aab0c4"/>
-              <rect x="-18" y="-3" width="12" height="5" rx="1" fill="#5de6ff" opacity=".65"/>
-              <rect x="6"  y="-3" width="12" height="5" rx="1" fill="#5de6ff" opacity=".65"/>
-              <!-- Antenna -->
-              <circle cx="0" cy="-10" r="2.5" fill="#ff4455" opacity=".8">
-                <animate attributeName="opacity" values=".8;0;.8" dur="1.2s" repeatCount="indefinite"/>
-              </circle>
-            </g>
-
-            <!-- Wrench -->
-            <g transform="translate(305,245) rotate(40)" opacity=".7">
-              <rect x="-2" y="-14" width="4" height="28" rx="2" fill="#9fa3b0"/>
-              <rect x="-8" y="-16" width="16" height="6"  rx="2" fill="#9fa3b0"/>
-              <rect x="-8" y="10"  width="16" height="6"  rx="2" fill="#9fa3b0"/>
-            </g>
-
-            <!-- Floating bolt -->
-            <g transform="translate(88,300) rotate(-15)" opacity=".6">
-              <rect x="-2" y="-8" width="4" height="16" rx="1" fill="#c0c4d4"/>
-              <rect x="-5" y="-10" width="10" height="4" rx="1" fill="#c0c4d4"/>
-            </g>
-
-            <!-- A few stars in SVG -->
-            <circle cx="40"  cy="40"  r="1.5" fill="white" opacity=".45"/>
-            <circle cx="310" cy="30"  r="1.8" fill="white" opacity=".55"/>
-            <circle cx="330" cy="380" r="1.2" fill="white" opacity=".4"/>
-            <circle cx="20"  cy="370" r="1"   fill="white" opacity=".35"/>
-          </svg>
-        </div>
-
-        <div class="scroll-hint" aria-hidden="true">
-          <span class="material-icons" style="font-size:1.3rem;">keyboard_arrow_down</span>
-          scroll
-        </div>
-      </div>
-    </section>
-
-    <hr class="cosmic" />
-
-    <!-- STATS -->
-    <section class="section-sm" id="stats">
       <div class="container">
-        <div class="grid grid-3 reveal">
-          <div class="card card-glass" style="text-align:center;">
-            <div class="section-label" style="justify-content:center;">Hackathon Wins</div>
-            <h2 class="gradient-text"><span class="counter" data-target="3" data-suffix="+">3+</span></h2>
-            <p class="text-muted" style="font-size:.85rem;margin-top:.5rem;">First Place Wins</p>
+        <div class="hero-layout">
+          <!-- Left content -->
+          <div class="hero-left">
+            <div class="hero-eyebrow animate-fadeUp">
+              <div class="section-label" style="margin-bottom:0;"><span class="pulse-dot"></span>&nbsp;Available for Work</div>
+              <span class="hero-name-sub">// Rohan Halaj</span>
+            </div>
+            <h1 class="hero-title animate-fadeUp delay-1">
+              AI &amp; <span class="gradient-text">Web Dev</span><br>
+              Engineer
+            </h1>
+            <p class="hero-desc animate-fadeUp delay-2">
+              Specializing in <span style="color:var(--primary-cont);font-weight:600;">Web Development</span>, <span style="color:var(--tertiary);font-weight:600;">Agentic AI</span> &amp; Automation, and Machine Learning to build the next generation of digital products.
+            </p>
+            <div class="hero-btns animate-fadeUp delay-3">
+              <a href="projects.html" class="btn btn-primary" id="hero-cta-projects">
+                <span class="material-icons" style="font-size:1rem;">code</span>View Projects
+              </a>
+              <a href="contact.html" class="btn btn-lime" id="hero-cta-contact">
+                <span class="material-icons" style="font-size:1rem;">alternate_email</span>Let's Talk
+              </a>
+              <a href="https://github.com" target="_blank" class="btn btn-secondary" id="hero-github">
+                <span class="material-icons" style="font-size:1rem;">link</span>GitHub
+              </a>
+            </div>
+
+            <!-- Stats row -->
+            <div class="hero-stat-row animate-fadeUp delay-4">
+              <div>
+                <span class="hero-stat-val gradient-text"><span class="counter" data-target="5" data-suffix="+">5+</span></span>
+                <span class="hero-stat-label">Years Coding</span>
+              </div>
+              <div>
+                <span class="hero-stat-val gradient-text-lime"><span class="counter" data-target="3" data-suffix="x">3x</span></span>
+                <span class="hero-stat-label">Hackathon Wins</span>
+              </div>
+              <div>
+                <span class="hero-stat-val gradient-text"><span class="counter" data-target="12" data-suffix="+">12+</span></span>
+                <span class="hero-stat-label">Live Projects</span>
+              </div>
+            </div>
           </div>
-          <div class="card card-glass" style="text-align:center;">
-            <div class="section-label" style="justify-content:center;">Global Reach</div>
-            <h2 class="gradient-text"><span class="counter" data-target="4" data-suffix="+">4+</span></h2>
-            <p class="text-muted" style="font-size:.85rem;margin-top:.5rem;">Global Finalist Rounds</p>
-          </div>
-          <div class="card card-glass" style="text-align:center;">
-            <div class="section-label" style="justify-content:center;">Live Systems</div>
-            <h2 class="gradient-text"><span class="counter" data-target="12" data-suffix="+">12+</span></h2>
-            <p class="text-muted" style="font-size:.85rem;margin-top:.5rem;">Active Data Streams</p>
+
+          <!-- Right visual: code card -->
+          <div class="hero-visual animate-fadeUp delay-2">
+            <div class="code-card">
+              <div class="code-card-dots">
+                <span></span><span></span><span></span>
+              </div>
+              <code>
+                <span class="code-line"><span class="code-cmt">// rohan.config.ts</span></span>
+                <span class="code-line">&nbsp;</span>
+                <span class="code-line"><span class="code-kw">const</span> <span class="code-fn">developer</span> <span class="code-punct">= {</span></span>
+                <span class="code-line">&nbsp;&nbsp;<span class="code-fn">name</span><span class="code-punct">:</span> <span class="code-str">"Rohan Halaj"</span><span class="code-punct">,</span></span>
+                <span class="code-line">&nbsp;&nbsp;<span class="code-fn">focus</span><span class="code-punct">: [</span></span>
+                <span class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-str">"Agentic AI"</span><span class="code-punct">,</span></span>
+                <span class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-str">"Web Dev"</span><span class="code-punct">,</span></span>
+                <span class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-str">"ML Systems"</span></span>
+                <span class="code-line">&nbsp;&nbsp;<span class="code-punct">],</span></span>
+                <span class="code-line">&nbsp;&nbsp;<span class="code-fn">stack</span><span class="code-punct">: [</span><span class="code-str">"Python"</span><span class="code-punct">,</span> <span class="code-str">"React"</span><span class="code-punct">,</span> <span class="code-str">"LangChain"</span><span class="code-punct">],</span></span>
+                <span class="code-line">&nbsp;&nbsp;<span class="code-fn">status</span><span class="code-punct">:</span> <span class="code-str">"open_to_work"</span> <span class="code-cursor"></span></span>
+                <span class="code-line"><span class="code-punct">};</span></span>
+              </code>
+            </div>
+            <!-- Floating pills -->
+            <div class="skill-pill skill-pill-1">Python</div>
+            <div class="skill-pill skill-pill-2">LangChain</div>
+            <div class="skill-pill skill-pill-3">React</div>
+            <div class="skill-pill skill-pill-4">FastAPI</div>
           </div>
         </div>
       </div>
     </section>
 
-    <hr class="cosmic" />
+    <hr class="divider" />
 
-    <!-- FEATURED -->
+    <!-- ═══ ABOUT STRIP ═══ -->
+    <section class="section-sm" id="about">
+      <div class="container">
+        <div class="about-strip">
+          <div>
+            <div class="section-label reveal">About Me</div>
+            <h2 class="reveal delay-1">Building with <span class="gradient-text">intent &amp;&nbsp;craft</span></h2>
+            <p class="reveal delay-2" style="margin-top:1.25rem;">
+              I'm a multi-disciplinary developer based in the digital realm. My journey began at the intersection of AI and web development, where I discovered my passion for building intelligent, high-performance systems.
+            </p>
+            <p class="reveal delay-3" style="margin-top:1rem;">
+              Whether it's an agentic AI pipeline, a real-time data system, or a polished web app — I approach every project with strategic intent and meticulous attention to detail.
+            </p>
+            <div class="reveal delay-4" style="margin-top:2rem;">
+              <a href="contact.html" class="btn btn-primary" id="about-cta">
+                <span class="material-icons" style="font-size:1rem;">download</span>Download CV
+              </a>
+            </div>
+          </div>
+          <div>
+            <div class="reveal delay-1">
+              <div class="skills-group">
+                <h4>Development</h4>
+                <div class="skills-pills">
+                  <span class="tag tag-blue">Python</span>
+                  <span class="tag tag-blue">React</span>
+                  <span class="tag tag-blue">FastAPI</span>
+                  <span class="tag tag-blue">Node.js</span>
+                  <span class="tag tag-blue">TypeScript</span>
+                </div>
+              </div>
+              <div class="skills-group">
+                <h4>AI & Automation</h4>
+                <div class="skills-pills">
+                  <span class="tag tag-lime">LangChain</span>
+                  <span class="tag tag-lime">PyTorch</span>
+                  <span class="tag tag-lime">TensorFlow</span>
+                  <span class="tag tag-lime">Ollama</span>
+                </div>
+              </div>
+              <div class="skills-group">
+                <h4>Tools & Infra</h4>
+                <div class="skills-pills">
+                  <span class="tag">Git</span>
+                  <span class="tag">Docker</span>
+                  <span class="tag">Figma</span>
+                  <span class="tag">PostgreSQL</span>
+                  <span class="tag">Vercel</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- ═══ WHAT I DO ═══ -->
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-label reveal">What I Do</div>
+        <h2 class="reveal delay-1" style="margin-bottom:2.5rem;">Services &amp; <span class="gradient-text">Expertise</span></h2>
+        <div class="grid grid-2 reveal delay-2">
+          <div class="service-card">
+            <div class="service-icon service-icon-blue">
+              <span class="material-icons">psychology</span>
+            </div>
+            <h4>Agentic AI Systems</h4>
+            <p class="text-muted" style="font-size:.9rem;">Building autonomous AI agents with LangChain, tool use, memory, and multi-agent orchestration pipelines.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon service-icon-lime">
+              <span class="material-icons">web</span>
+            </div>
+            <h4>Web Development</h4>
+            <p class="text-muted" style="font-size:.9rem;">Turning designs into responsive, pixel-perfect web applications with React, Next.js, and modern toolchains.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon service-icon-cyan">
+              <span class="material-icons">hub</span>
+            </div>
+            <h4>ML Engineering</h4>
+            <p class="text-muted" style="font-size:.9rem;">Training, fine-tuning, and deploying machine learning models for real-world, production-grade applications.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon service-icon-blue">
+              <span class="material-icons">design_services</span>
+            </div>
+            <h4>UI/UX Design</h4>
+            <p class="text-muted" style="font-size:.9rem;">Creating user-centric interfaces that are accessible, intuitive, and visually stunning using modern design systems.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- ═══ FEATURED ACHIEVEMENTS ═══ -->
     <section class="section" id="featured">
       <div class="container">
-        <div class="section-label reveal">Recent Transmissions</div>
-        <h2 class="reveal delay-1" style="margin-bottom:2rem;">Featured <span class="gradient-text">Achievements</span></h2>
+        <div class="section-label reveal">Recent Highlights</div>
+        <h2 class="reveal delay-1" style="margin-bottom:2.5rem;">Featured <span class="gradient-text">Achievements</span></h2>
         <div class="grid grid-2">
-          <div class="card reveal delay-1">
-            <div class="tag tag-cyan" style="margin-bottom:1rem;"><span class="pulse-dot"></span>&nbsp; Active</div>
-            <h3>ETH Global '24</h3>
-            <p class="text-muted mt-2">Best DeFi Infrastructure — Global Deployments across orbital nodes using zero-knowledge proofs.</p>
-            <a href="achievements.html" class="btn btn-ghost" style="margin-top:1.5rem;padding-left:0;" id="home-feat-ach-1">
+          <article class="win-card reveal delay-1" id="home-feat-1">
+            <span class="win-rank">01</span>
+            <div class="tag tag-lime" style="width:fit-content;"><span class="pulse-dot"></span>&nbsp;Active</div>
+            <div class="timeline-label">ETH Global '24 // Best DeFi Infrastructure</div>
+            <h3>NEBULA_HACK</h3>
+            <p class="text-muted" style="font-size:.9rem;">Pioneered a decentralized cloud-storage protocol using zero-knowledge proofs. Global deployment across six continents.</p>
+            <a href="achievements.html" class="btn btn-ghost" style="padding-left:0;margin-top:.5rem;" id="home-feat-ach-1">
               View Details <span class="material-icons" style="font-size:.9rem;">arrow_forward</span>
             </a>
-          </div>
-          <div class="card reveal delay-2">
-            <div class="tag" style="margin-bottom:1rem;"><span class="material-icons" style="font-size:.9rem;">military_tech</span> Winner</div>
-            <h3>HackTheSpace</h3>
-            <p class="text-muted mt-2">Top Innovation Award — Engineered real-time visualization engine for multi-agent systems.</p>
-            <a href="achievements.html" class="btn btn-ghost" style="margin-top:1.5rem;padding-left:0;" id="home-feat-ach-2">
+          </article>
+          <article class="win-card reveal delay-2" id="home-feat-2">
+            <span class="win-rank">02</span>
+            <div class="tag tag-blue" style="width:fit-content;"><span class="material-icons" style="font-size:.8rem;">military_tech</span>&nbsp;Winner</div>
+            <div class="timeline-label">HackTheSpace // Top Innovation Award</div>
+            <h3>VOID_CORE_V2</h3>
+            <p class="text-muted" style="font-size:.9rem;">Engineered a real-time visualization engine for multi-agent systems in low-latency environments. System metrics redefined.</p>
+            <a href="achievements.html" class="btn btn-ghost" style="padding-left:0;margin-top:.5rem;" id="home-feat-ach-2">
               View Details <span class="material-icons" style="font-size:.9rem;">arrow_forward</span>
             </a>
-          </div>
-          <div class="card reveal delay-3">
-            <div class="tag" style="margin-bottom:1rem;"><span class="material-icons" style="font-size:.9rem;">emoji_events</span> Finalist</div>
-            <h3>Meta-Hack</h3>
-            <p class="text-muted mt-2">Best UX/UI Finalist — Experimental dark-matter visualization interface.</p>
-            <a href="achievements.html" class="btn btn-ghost" style="margin-top:1.5rem;padding-left:0;" id="home-feat-ach-3">
+          </article>
+          <article class="win-card reveal delay-3" id="home-feat-3">
+            <span class="win-rank">03</span>
+            <div class="tag" style="width:fit-content;"><span class="material-icons" style="font-size:.8rem;">emoji_events</span>&nbsp;Finalist</div>
+            <div class="timeline-label">Meta-Hack // Best UX/UI</div>
+            <h3>DARK_MATTER</h3>
+            <p class="text-muted" style="font-size:.9rem;">Experimental UI for visualizing dark matter distribution maps. Awarded Best UX/UI for immersive data storytelling.</p>
+            <a href="achievements.html" class="btn btn-ghost" style="padding-left:0;margin-top:.5rem;" id="home-feat-ach-3">
               View Details <span class="material-icons" style="font-size:.9rem;">arrow_forward</span>
             </a>
-          </div>
-          <div class="card reveal delay-4" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:1rem;">
-            <span class="material-icons" style="font-size:3rem;color:var(--primary);opacity:.7;">auto_awesome</span>
+          </article>
+          <div class="card card-glass reveal delay-4" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:1.25rem;min-height:280px;" id="home-see-all">
+            <span class="material-icons animate-float" style="font-size:3rem;color:var(--tertiary);opacity:.85;">emoji_events</span>
             <h3>See All Wins</h3>
-            <p class="text-muted" style="font-size:.9rem;">Explore the full record of hackathons and awards.</p>
-            <a href="achievements.html" class="btn btn-primary" id="home-cta-achievements">Explore Wins</a>
+            <p class="text-muted" style="font-size:.9rem;">Explore the full record of hackathons, awards &amp; global finalist rounds.</p>
+            <a href="achievements.html" class="btn btn-lime" id="home-cta-achievements">Explore Wins</a>
           </div>
         </div>
       </div>
     </section>
 
-    <hr class="cosmic" />
+    <hr class="divider" />
 
-    <!-- CTA -->
+    <!-- ═══ TESTIMONIALS ═══ -->
+    <section class="section-sm" id="testimonials">
+      <div class="container">
+        <div class="section-label reveal">What People Say</div>
+        <h2 class="reveal delay-1" style="margin-bottom:2.5rem;">Client <span class="gradient-text">Testimonials</span></h2>
+        <div class="grid grid-3 reveal delay-2">
+          <div class="testimonial-card">
+            <p class="testimonial-text">Rohan transformed our vision into a tangible digital reality. The attention to detail in the UI phase was absolutely world-class.</p>
+            <div>
+              <p class="testimonial-author">Jordan Smith</p>
+              <p class="testimonial-role">Product Designer</p>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-text">Exceptional eye for typography and spacing. Our conversion rates improved by 40% after the redesign launch. Highly recommended.</p>
+            <div>
+              <p class="testimonial-author">Casey Chen</p>
+              <p class="testimonial-role">Startup Founder</p>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-text">The AI pipeline Rohan built handles 10k requests per minute with zero downtime. Engineering at a level I've rarely seen.</p>
+            <div>
+              <p class="testimonial-author">Alex Rivera</p>
+              <p class="testimonial-role">CTO, TechCorp</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- ═══ CTA ═══ -->
     <section class="section-sm" id="cta-banner">
       <div class="container">
-        <div class="card card-glass reveal" style="text-align:center;padding:4rem 2rem;background:linear-gradient(135deg,rgba(107,33,168,.15),rgba(93,230,255,.05));">
-          <div class="section-label" style="justify-content:center;">Ready to Connect?</div>
-          <h2 style="margin:.75rem 0 1.5rem;">Let's build something <span class="gradient-text">extraordinary</span></h2>
-          <p class="text-muted" style="max-width:500px;margin:0 auto 2rem;">Open to collaborations, hackathons, and full-time cosmic engineering roles.</p>
+        <div class="cta-banner reveal">
+          <div class="section-label" style="justify-content:center;">Have an idea?</div>
+          <h2 style="margin:.75rem 0 1.25rem;">Let's build something <span class="gradient-text">extraordinary</span></h2>
+          <p class="text-muted" style="max-width:480px;margin:0 auto 2rem;">Open to collaborations, hackathons, and full-time engineering roles. Let's connect.</p>
           <div class="flex gap-2" style="justify-content:center;flex-wrap:wrap;">
-            <a href="contact.html" class="btn btn-primary" id="home-cta-contact">Initiate Contact</a>
-            <a href="projects.html" class="btn btn-secondary" id="home-cta-projects">View All Projects</a>
+            <a href="contact.html" class="btn btn-primary" id="home-cta-contact">
+              <span class="material-icons" style="font-size:1rem;">alternate_email</span>Get in Touch
+            </a>
+            <a href="projects.html" class="btn btn-secondary" id="home-cta-projects">View Projects</a>
           </div>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- FOOTER -->
+  <!-- ═══ FOOTER ═══ -->
   <footer class="main-footer">
     <div class="footer-inner">
-      <a href="index.html" class="nav-logo" style="font-size:1.1rem;">NEBULA<span>_PROTOCOL</span></a>
+      <a href="index.html" class="nav-logo" style="font-size:1rem;">ROHAN<span>.DEV</span></a>
       <ul class="footer-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="projects.html">Projects</a></li>
         <li><a href="achievements.html">Wins</a></li>
-        <li><a href="contact.html">Connect</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
-      <p class="footer-copy">© 2024 NEBULA PROTOCOL. SHAPED IN THE VOID.</p>
+      <p class="footer-copy">© 2025 Rohan Halaj. All rights reserved.</p>
     </div>
   </footer>
+
 </div><!-- /.page-wrapper -->
 
 <script src="main.js"></script>
-<script>
-// ══════════════════════════════════════════════════════
-// 1. INTRO STARS (canvas inside overlay)
-// ══════════════════════════════════════════════════════
-// ══════════════════════════════════════════════════════
-// 1. INTRO BACKGROUND: CONTINUOUS METEOR CLASH EXPLOSIONS
-// ══════════════════════════════════════════════════════
-(function introClashCanvas() {
-  const c = document.getElementById('intro-clash-canvas');
-  if (!c) return;
-  const ctx = c.getContext('2d');
-
-  function resize() { c.width = window.innerWidth; c.height = window.innerHeight; }
-  resize();
-  window.addEventListener('resize', resize);
-
-  // ── Twinkling stars bg ──────────────────────────────
-  const stars = Array.from({ length: 200 }, () => ({
-    x: Math.random() * c.width,
-    y: Math.random() * c.height,
-    r: Math.random() * 1.6 + .3,
-    a: Math.random(),
-    da: (Math.random() * .006 + .002) * (Math.random() < .5 ? 1 : -1),
-  }));
-
-  // ── Live meteors (pairs converge & explode) ─────────
-  const meteors  = [];
-  const blasts   = [];  // explosion particles
-
-  const COLORS = ['#dfb7ff','#5de6ff','#ff9900','#ff6644','#ffee44','#00cbe6','#9333ea'];
-
-  function spawnClash() {
-    // two meteors from opposite corners converging at a random point
-    const cx = 80 + Math.random() * (c.width  - 160);
-    const cy = 60 + Math.random() * (c.height * .65);
-    const spd = 5 + Math.random() * 7;
-    const col1 = COLORS[Math.floor(Math.random() * COLORS.length)];
-    const col2 = COLORS[Math.floor(Math.random() * COLORS.length)];
-
-    // Meteor A — from top-left region
-    meteors.push({
-      x: cx - 260 - Math.random() * 200,
-      y: cy - 180 - Math.random() * 150,
-      tx: cx, ty: cy,
-      vx: 0, vy: 0,
-      speed: spd,
-      len: 100 + Math.random() * 100,
-      w: 1.5 + Math.random() * 2.5,
-      color: col1,
-      alpha: 1,
-      partner: meteors.length + 1,
-      exploded: false,
-    });
-    // Meteor B — from top-right region
-    meteors.push({
-      x: cx + 260 + Math.random() * 200,
-      y: cy - 180 - Math.random() * 150,
-      tx: cx, ty: cy,
-      vx: 0, vy: 0,
-      speed: spd * .95,
-      len: 100 + Math.random() * 100,
-      w: 1.5 + Math.random() * 2.5,
-      color: col2,
-      alpha: 1,
-      partner: meteors.length - 1,
-      exploded: false,
-    });
-  }
-
-  // Single streakers (extras between clashes)
-  function spawnStreaker() {
-    const angle = Math.PI / 4 + (Math.random() - .5) * .6;
-    meteors.push({
-      x:    -80 + Math.random() * c.width * .5,
-      y:    -30 + Math.random() * c.height * .3,
-      tx: null, ty: null,
-      vx:   Math.cos(angle) * (6 + Math.random() * 8),
-      vy:   Math.sin(angle) * (6 + Math.random() * 8),
-      speed: 0,
-      len:  80 + Math.random() * 120,
-      w:    .8 + Math.random() * 1.8,
-      color: COLORS[Math.floor(Math.random() * COLORS.length)],
-      alpha: 1,
-      exploded: true,  // streakers don't explode
-    });
-  }
-
-  setInterval(spawnClash,    700);
-  setInterval(spawnStreaker, 400);
-
-  // Explosion burst at collision point
-  function explodeAt(x, y, col1, col2) {
-    const n = 18 + Math.floor(Math.random() * 14);
-    for (let i = 0; i < n; i++) {
-      const angle = (i / n) * Math.PI * 2 + Math.random() * .4;
-      const spd   = 1.5 + Math.random() * 5;
-      blasts.push({
-        x, y,
-        vx:    Math.cos(angle) * spd,
-        vy:    Math.sin(angle) * spd,
-        r:     2 + Math.random() * 4,
-        alpha: 1,
-        color: Math.random() < .5 ? col1 : col2,
-        decay: .025 + Math.random() * .02,
-      });
-    }
-    // Shockwave ring drawn temporarily
-    blasts.push({ shockwave: true, x, y, r: 4, maxR: 80 + Math.random() * 60, alpha: .9, color: col1 });
-  }
-
-  function drawMeteor(m, dx, dy) {
-    const len = m.len;
-    const nx  = -dx / (Math.hypot(dx, dy) || 1);
-    const ny  = -dy / (Math.hypot(dx, dy) || 1);
-    const grad = ctx.createLinearGradient(m.x, m.y, m.x + nx * len, m.y + ny * len);
-    grad.addColorStop(0,   m.color);
-    grad.addColorStop(.4,  m.color);
-    grad.addColorStop(1,   'transparent');
-    ctx.beginPath();
-    ctx.moveTo(m.x, m.y);
-    ctx.lineTo(m.x + nx * len, m.y + ny * len);
-    ctx.strokeStyle = grad;
-    ctx.lineWidth = m.w;
-    ctx.shadowBlur = 12;
-    ctx.shadowColor = m.color;
-    ctx.globalAlpha = m.alpha;
-    ctx.stroke();
-    // head glow
-    ctx.beginPath();
-    ctx.arc(m.x, m.y, m.w * 2.2, 0, Math.PI * 2);
-    ctx.fillStyle = m.color;
-    ctx.fill();
-    ctx.shadowBlur = 0;
-    ctx.globalAlpha = 1;
-  }
-
-  function loop() {
-    ctx.clearRect(0, 0, c.width, c.height);
-
-    // Stars
-    for (const s of stars) {
-      ctx.beginPath();
-      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255,255,255,${Math.max(0, Math.min(1, s.a))})`;
-      ctx.fill();
-      s.a += s.da;
-      if (s.a > 1 || s.a < .06) s.da *= -1;
-    }
-
-    // Meteors
-    for (let i = meteors.length - 1; i >= 0; i--) {
-      const m = meteors[i];
-
-      if (m.tx !== null) {
-        // Guided clash meteor — move toward target
-        const dx = m.tx - m.x;
-        const dy = m.ty - m.y;
-        const dist = Math.hypot(dx, dy);
-
-        if (dist < 8 && !m.exploded) {
-          // COLLISION!
-          m.exploded = true;
-          if (i > 0 && meteors[i-1] && !meteors[i-1].exploded) {
-            meteors[i-1].exploded = true;
-          }
-          explodeAt(m.tx, m.ty, m.color, COLORS[Math.floor(Math.random() * COLORS.length)]);
-          meteors.splice(i, 1);
-          continue;
-        }
-
-        if (dist > 0) {
-          m.vx = (dx / dist) * m.speed;
-          m.vy = (dy / dist) * m.speed;
-        }
-        drawMeteor(m, dx, dy);
-        m.x += m.vx;
-        m.y += m.vy;
-        m.alpha = Math.max(.3, 1 - (1 - dist / 400));
-      } else {
-        // Free streaker
-        drawMeteor(m, -m.vx * 12, -m.vy * 12);
-        m.x += m.vx;
-        m.y += m.vy;
-        m.alpha -= .013;
-        if (m.alpha <= 0 || m.x > c.width + 300 || m.y > c.height + 300) {
-          meteors.splice(i, 1);
-        }
-      }
-    }
-
-    // Blasts / particles
-    for (let i = blasts.length - 1; i >= 0; i--) {
-      const b = blasts[i];
-      if (b.shockwave) {
-        ctx.beginPath();
-        ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
-        ctx.strokeStyle = b.color;
-        ctx.lineWidth = 2.5;
-        ctx.globalAlpha = b.alpha;
-        ctx.shadowBlur = 15;
-        ctx.shadowColor = b.color;
-        ctx.stroke();
-        ctx.shadowBlur = 0;
-        ctx.globalAlpha = 1;
-        b.r     += 4.5;
-        b.alpha -= .04;
-        if (b.alpha <= 0 || b.r >= b.maxR) blasts.splice(i, 1);
-      } else {
-        ctx.beginPath();
-        ctx.arc(b.x, b.y, b.r * b.alpha, 0, Math.PI * 2);
-        ctx.fillStyle = b.color;
-        ctx.globalAlpha = b.alpha;
-        ctx.shadowBlur = 8;
-        ctx.shadowColor = b.color;
-        ctx.fill();
-        ctx.shadowBlur = 0;
-        ctx.globalAlpha = 1;
-        b.x += b.vx;
-        b.y += b.vy;
-        b.vy += .08;  // gravity
-        b.alpha -= b.decay;
-        if (b.alpha <= 0) blasts.splice(i, 1);
-      }
-    }
-
-    requestAnimationFrame(loop);
-  }
-  loop();
-})();
-
-// ══════════════════════════════════════════════════════
-// 2. MOON LANDING INTRO SEQUENCE
-// ══════════════════════════════════════════════════════
-(function introSequence() {
-  const overlay  = document.getElementById('intro-overlay');
-  const flagGrp  = document.getElementById('flag-group');
-  const skip     = document.getElementById('intro-skip');
-  if (!overlay) return;
-
-  function dismiss() {
-    overlay.classList.add('fade-out');
-    document.body.style.overflow = '';
-    setTimeout(() => { overlay.remove(); }, 950);
-  }
-
-  document.body.style.overflow = 'hidden';
-
-  // ── Flag + speech bubble appear at 2s ──────────────
-  setTimeout(() => {
-    if (flagGrp) {
-      flagGrp.style.transition = 'opacity .7s ease';
-      flagGrp.style.opacity    = '1';
-    }
-    animateFlagWave();
-    animateWavingArm();
-  }, 2000);
-
-  // ── Speech bubble appears at 2.6s ──────────────────
-  setTimeout(() => {
-    const bubble = document.getElementById('speech-bubble');
-    if (bubble) {
-      bubble.style.transition = 'opacity .5s ease';
-      bubble.style.opacity    = '1';
-    }
-    typeBubbleMessages();
-  }, 2600);
-
-  // Auto-dismiss at 7s
-  let autoTimer = setTimeout(dismiss, 7000);
-
-  if (skip) {
-    skip.addEventListener('click', () => { clearTimeout(autoTimer); dismiss(); });
-  }
-
-  // ──────────────────────────────────────────────────────
-  // FLAG WAVE — fabric + text + stars + sheen all move
-  // ──────────────────────────────────────────────────────
-  function animateFlagWave() {
-    const path  = document.getElementById('flag-wave');
-    const txt   = document.getElementById('flag-text');
-    const starL = document.getElementById('flag-star-l');
-    const starR = document.getElementById('flag-star-r');
-    const sheen = document.getElementById('flag-sheen');
-
-    let t = 0;
-
-    function wave() {
-      t += 0.048;
-
-      // Multiple sine waves for organic cloth ripple
-      const w1 = Math.sin(t)         * 8;   // primary wave
-      const w2 = Math.sin(t + 1.1)   * 6;   // secondary
-      const w3 = Math.sin(t + 2.2)   * 4;   // tertiary (tip)
-      const wy = Math.sin(t * .8)    * 3;   // subtle vertical breathe
-
-      // ── Cloth path ──
-      if (path) {
-        path.setAttribute('d',
-          `M 330 84 ` +
-          // top edge, rippling left to right
-          `Q ${372 + w1} ${76 - w2 + wy} ${415 + w2} ${88 + w1 + wy} ` +
-          `Q ${460 - w1} ${100 + w2} ${504 + w3} ${92 - w1} ` +
-          // right edge (straight-ish but breathing)
-          `L ${504 + w3} ${152 - w1} ` +
-          // bottom edge (mirror of top, slightly offset phase)
-          `Q ${460 - w1} ${160 - w2} ${415 + w2} ${148 - w1 + wy} ` +
-          `Q ${372 + w1} ${136 + w2 - wy} 330 144 Z`
-        );
-      }
-
-      // ── Sheen highlight path follows top edge ──
-      if (sheen) {
-        sheen.setAttribute('d',
-          `M 340 ${88 + wy} Q ${372 + w1} ${78 - w2 + wy} ${415 + w2} ${90 + w1 + wy} Q ${450 - w1} ${100 + w2} ${492 + w3} ${93 - w1}`
-        );
-      }
-
-      // ── Text: translate X by mid-wave so it appears to float on the cloth ──
-      if (txt) {
-        // x shifts with wave (text follows the middle of the flag)
-        const tx = w1 * 0.55 + w2 * 0.3;
-        const ty = wy * 0.6 + Math.sin(t + 0.5) * 1.5;
-        // skewX makes text lean with the wave direction
-        const skew = (w1 * 0.18).toFixed(2);
-        txt.setAttribute('transform', `translate(${tx.toFixed(2)},${ty.toFixed(2)}) skewX(${skew})`);
-      }
-
-      // ── Stars bob independently ──
-      if (starL) {
-        const slx = w2 * 0.4;
-        const sly = wy + Math.sin(t + 0.3) * 1.8;
-        starL.setAttribute('transform', `translate(${slx.toFixed(1)},${sly.toFixed(1)})`);
-      }
-      if (starR) {
-        const srx = w3 * 0.5;
-        const sry = wy * .8 + Math.sin(t + 2) * 2;
-        starR.setAttribute('transform', `translate(${srx.toFixed(1)},${sry.toFixed(1)})`);
-      }
-
-      requestAnimationFrame(wave);
-    }
-    wave();
-  }
-
-  // ──────────────────────────────────────────────────────
-  // WAVING ARM — rotates from shoulder pivot
-  // ──────────────────────────────────────────────────────
-  function animateWavingArm() {
-    const arm = document.getElementById('wave-arm');
-    if (!arm) return;
-
-    let t = 0;
-    // Pivot point is the shoulder at approx (24, 10) in astronaut-space
-    function waveArm() {
-      t += 0.07;
-      // Swing between -20deg and +25deg from shoulder
-      const angle = -20 + Math.sin(t * 1.4) * 22 + Math.cos(t * .9) * 8;
-      arm.setAttribute('transform', `rotate(${angle.toFixed(1)}, 24, 10)`);
-      requestAnimationFrame(waveArm);
-    }
-    waveArm();
-  }
-
-  // ──────────────────────────────────────────────────────
-  // SPEECH BUBBLE — rotating typed messages
-  // ──────────────────────────────────────────────────────
-  const MESSAGES = [
-    { l1: '👋  HI THERE!',   l2: "I'm Rohan Halaj" },
-    { l1: '🌕  FIRST STEP', l2: '1 small leap...' },
-    { l1: '🚀  LET\'S BUILD', l2: 'Something epic!' },
-    { l1: '⭐ WELCOME!',    l2: 'To my portfolio' },
-  ];
-  let msgIdx = 0;
-
-  function typeBubbleMessages() {
-    const el1 = document.getElementById('bubble-line1');
-    const el2 = document.getElementById('bubble-line2');
-    if (!el1 || !el2) return;
-
-    function showMsg(idx) {
-      const msg = MESSAGES[idx % MESSAGES.length];
-      el1.textContent = '';
-      el2.textContent = '';
-
-      // Type line 1
-      typeInto(el1, msg.l1, 55, () => {
-        // Then type line 2
-        setTimeout(() => {
-          typeInto(el2, msg.l2, 45, () => {
-            // Hold then clear and show next
-            setTimeout(() => {
-              eraseInto(el1, () => {
-                eraseInto(el2, () => {
-                  setTimeout(() => showMsg(idx + 1), 180);
-                });
-              });
-            }, 1200);
-          });
-        }, 150);
-      });
-    }
-
-    showMsg(0);
-  }
-
-  function typeInto(el, text, speed, done) {
-    let i = 0;
-    function step() {
-      if (i <= text.length) {
-        el.textContent = text.slice(0, i);
-        i++;
-        setTimeout(step, speed + Math.random() * 25);
-      } else if (done) done();
-    }
-    step();
-  }
-
-  function eraseInto(el, done) {
-    let txt = el.textContent;
-    function step() {
-      if (txt.length > 0) {
-        txt = txt.slice(0, -1);
-        el.textContent = txt;
-        setTimeout(step, 28);
-      } else if (done) done();
-    }
-    step();
-  }
-
-})();
-
-// ══════════════════════════════════════════════════════
-// 3. SPACE CANVAS — Meteors, Satellites, Asteroids
-// ══════════════════════════════════════════════════════
-(function spaceCanvas() {
-  const canvas = document.getElementById('space-canvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-
-  function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-  resize();
-  window.addEventListener('resize', resize);
-
-  // Meteors
-  const meteors = [];
-  function spawnMeteor() {
-    const angle = Math.PI / 4 + (Math.random() - .5) * .5;
-    meteors.push({
-      x:     Math.random() * canvas.width * 1.2 - canvas.width * .2,
-      y:     Math.random() * canvas.height * .45 - 40,
-      vx:    Math.cos(angle) * (7 + Math.random() * 9),
-      vy:    Math.sin(angle) * (7 + Math.random() * 9),
-      len:   90 + Math.random() * 130,
-      alpha: 1,
-      w:     Math.random() * 1.6 + .5,
-      color: Math.random() < .5 ? '#dfb7ff' : '#5de6ff',
-    });
-  }
-  setInterval(spawnMeteor, 900 + Math.random() * 600);
-
-  // Satellites
-  const satellites = Array.from({ length: 5 }, (_, i) => ({
-    x:     Math.random() * canvas.width,
-    y:     30 + Math.random() * canvas.height * .55,
-    vx:    (i % 2 === 0 ? 1 : -1) * (.4 + Math.random() * .7),
-    vy:    (Math.random() - .5) * .12,
-    size:  10 + Math.random() * 9,
-    angle: Math.random() * Math.PI * 2,
-    spin:  (Math.random() - .5) * .008,
-    blink: Math.random() * Math.PI * 2,
-  }));
-
-  // Asteroids
-  const asteroids = Array.from({ length: 22 }, () => {
-    const r = 2 + Math.random() * 5;
-    return {
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      vx: (Math.random() - .5) * .35,
-      vy: (Math.random() - .5) * .18,
-      r,
-      angle: Math.random() * Math.PI * 2,
-      spin:  (Math.random() - .5) * .012,
-      pts:   buildAst(r),
-      alpha: .35 + Math.random() * .45,
-    };
-  });
-  function buildAst(r) {
-    const n = 7 + Math.floor(Math.random() * 4);
-    return Array.from({ length: n }, (_, i) => {
-      const a  = (i / n) * Math.PI * 2;
-      const rr = r * (.65 + Math.random() * .65);
-      return [Math.cos(a) * rr, Math.sin(a) * rr];
-    });
-  }
-
-  function drawSat(s) {
-    ctx.save();
-    ctx.translate(s.x, s.y);
-    ctx.rotate(s.angle);
-    const pw = s.size * 1.8, ph = s.size * .35;
-    // Panels
-    const pg = ctx.createLinearGradient(-pw, 0, pw, 0);
-    pg.addColorStop(0, 'rgba(93,230,255,.15)');
-    pg.addColorStop(.5, 'rgba(93,230,255,.65)');
-    pg.addColorStop(1, 'rgba(93,230,255,.15)');
-    ctx.fillStyle = pg;
-    ctx.fillRect(-pw - s.size * .4, -ph / 2, pw, ph);
-    ctx.fillRect(s.size * .4, -ph / 2, pw, ph);
-    // Body
-    const bg = ctx.createLinearGradient(-s.size * .4, 0, s.size * .4, 0);
-    bg.addColorStop(0, '#7080a0');
-    bg.addColorStop(.5, '#c0cad8');
-    bg.addColorStop(1, '#7080a0');
-    ctx.fillStyle = bg;
-    ctx.beginPath();
-    ctx.roundRect(-s.size * .4, -s.size * .4, s.size * .8, s.size * .8, 3);
-    ctx.fill();
-    // Blink
-    s.blink += .04;
-    if (Math.sin(s.blink) > 0) {
-      ctx.beginPath();
-      ctx.arc(0, -s.size * .45, 2.5, 0, Math.PI * 2);
-      ctx.fillStyle = '#ff3344';
-      ctx.shadowBlur = 8;
-      ctx.shadowColor = '#ff2233';
-      ctx.fill();
-      ctx.shadowBlur = 0;
-    }
-    ctx.restore();
-  }
-
-  function drawMeteor(m) {
-    const spd = Math.hypot(m.vx, m.vy);
-    const grad = ctx.createLinearGradient(m.x, m.y, m.x - m.vx / spd * m.len, m.y - m.vy / spd * m.len);
-    const col = m.color;
-    grad.addColorStop(0, col.replace('rgb', 'rgba').replace(')', `,${m.alpha})`));
-    grad.addColorStop(1, 'transparent');
-    ctx.beginPath();
-    ctx.moveTo(m.x, m.y);
-    ctx.lineTo(m.x - m.vx / spd * m.len, m.y - m.vy / spd * m.len);
-    ctx.strokeStyle = grad;
-    ctx.lineWidth = m.w;
-    ctx.shadowBlur = 10;
-    ctx.shadowColor = col;
-    ctx.stroke();
-    ctx.shadowBlur = 0;
-    ctx.beginPath();
-    ctx.arc(m.x, m.y, m.w * 2, 0, Math.PI * 2);
-    ctx.fillStyle = col;
-    ctx.fill();
-  }
-
-  function drawAst(a) {
-    ctx.save();
-    ctx.translate(a.x, a.y);
-    ctx.rotate(a.angle);
-    ctx.globalAlpha = a.alpha;
-    ctx.beginPath();
-    ctx.moveTo(a.pts[0][0], a.pts[0][1]);
-    for (let i = 1; i < a.pts.length; i++) ctx.lineTo(a.pts[i][0], a.pts[i][1]);
-    ctx.closePath();
-    const ag = ctx.createRadialGradient(0, 0, 0, 0, 0, a.r);
-    ag.addColorStop(0, 'rgba(190,180,210,.85)');
-    ag.addColorStop(1, 'rgba(80,70,100,.3)');
-    ctx.fillStyle = ag;
-    ctx.fill();
-    ctx.strokeStyle = 'rgba(200,190,220,.3)';
-    ctx.lineWidth = .6;
-    ctx.stroke();
-    ctx.globalAlpha = 1;
-    ctx.restore();
-  }
-
-  function loop() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for (let i = meteors.length - 1; i >= 0; i--) {
-      const m = meteors[i];
-      drawMeteor(m);
-      m.x += m.vx; m.y += m.vy; m.alpha -= .011;
-      if (m.alpha <= 0 || m.x > canvas.width + 200 || m.y > canvas.height + 200) meteors.splice(i, 1);
-    }
-    for (const s of satellites) {
-      drawSat(s);
-      s.x += s.vx; s.y += s.vy; s.angle += s.spin;
-      if (s.x > canvas.width + 100) s.x = -100;
-      if (s.x < -100) s.x = canvas.width + 100;
-    }
-    for (const a of asteroids) {
-      drawAst(a);
-      a.x += a.vx; a.y += a.vy; a.angle += a.spin;
-      if (a.x > canvas.width  + 30) a.x = -30;
-      if (a.x < -30) a.x = canvas.width + 30;
-      if (a.y > canvas.height + 30) a.y = -30;
-      if (a.y < -30) a.y = canvas.height + 30;
-    }
-    requestAnimationFrame(loop);
-  }
-  loop();
-})();
-
-// ══════════════════════════════════════════════════════
-// 4. ROCKET SCROLLBAR — tilts on scroll direction
-// ══════════════════════════════════════════════════════
-(function rocketScroll() {
-  const rocket  = document.getElementById('rocket-scroller');
-  if (!rocket) return;
-
-  let lastY     = 0;
-  let velocity  = 0;
-  let raf;
-
-  function update() {
-    const scrolled = document.documentElement.scrollTop;
-    const total    = document.documentElement.scrollHeight - window.innerHeight;
-    if (total <= 0) return;
-
-    const pct    = Math.max(0, Math.min(1, scrolled / total));
-    const trackH = window.innerHeight - 60;
-    const newTop = pct * trackH + 8;
-
-    rocket.style.top = newTop + 'px';
-
-    // Velocity → tilt angle
-    velocity = scrolled - lastY;
-    lastY    = scrolled;
-
-    // Clamp tilt: scroll down = tilt forward (nose down = rotate +), scroll up = nose up = rotate -
-    const rawAngle = Math.max(-45, Math.min(45, velocity * 3.5));
-    rocket.style.transform = `rotate(${rawAngle}deg)`;
-  }
-
-  window.addEventListener('scroll', () => {
-    cancelAnimationFrame(raf);
-    raf = requestAnimationFrame(() => {
-      update();
-      // Snap back to upright after scroll stops
-      setTimeout(() => {
-        rocket.style.transform = 'rotate(0deg)';
-      }, 350);
-    });
-  }, { passive: true });
-
-  update();
-})();
-
-// ══════════════════════════════════════════════════════
-// 5. TYPING EFFECT — hero subtitle
-// ══════════════════════════════════════════════════════
-window.addEventListener('load', () => {
-  // Wait for intro to reach mid-point then type
-  setTimeout(() => {
-    const el = document.getElementById('hero-type');
-    if (!el) return;
-    typeEffect(el, 'Navigating the digital void to engineer high-frequency solutions. Specialized in neural architectures and full-stack cosmic deployments.');
-  }, 5400);
-});
-</script>
 </body>
 </html>

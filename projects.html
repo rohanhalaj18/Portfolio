@@ -3,394 +3,259 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Projects — NEBULA PROTOCOL</title>
-  <meta name="description" content="AETHER_PORTFOLIO // Project Nexus — A collection of high-frequency solutions engineered across the digital void." />
+  <title>Projects — Rohan Halaj Portfolio</title>
+  <meta name="description" content="A collection of AI, web, and systems engineering projects built by Rohan Halaj." />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-  <style>
-    .project-card {
-      background: var(--surface-mid);
-      border-radius: var(--radius-lg);
-      padding: 2rem;
-      position: relative;
-      overflow: hidden;
-      transition: transform .3s, box-shadow .3s;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-    .project-card::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--primary-cont), var(--secondary));
-      opacity: 0;
-      transition: opacity .3s;
-    }
-    .project-card:hover { transform: translateY(-5px); box-shadow: 0 0 50px rgba(107,33,168,.25); }
-    .project-card:hover::after { opacity: 1; }
-
-    .project-num {
-      font-family: var(--font-display);
-      font-size: .65rem;
-      font-weight: 700;
-      letter-spacing: .2em;
-      color: var(--outline);
-      text-transform: uppercase;
-    }
-    .project-tech {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .4rem;
-      margin-top: .5rem;
-    }
-    .project-links {
-      display: flex;
-      gap: .75rem;
-      flex-wrap: wrap;
-      margin-top: auto;
-      padding-top: 1rem;
-      border-top: 1px solid rgba(76,68,82,.15);
-    }
-    .filter-bar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .5rem;
-      margin-bottom: 2.5rem;
-    }
-    .filter-btn {
-      padding: .4rem 1rem;
-      border-radius: 999px;
-      font-size: .75rem;
-      font-weight: 600;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      cursor: pointer;
-      border: 1px solid rgba(76,68,82,.3);
-      background: transparent;
-      color: var(--on-surface-var);
-      transition: all .25s;
-    }
-    .filter-btn:hover,
-    .filter-btn.active {
-      background: rgba(107,33,168,.25);
-      border-color: rgba(107,33,168,.4);
-      color: var(--primary);
-    }
-  </style>
 </head>
 <body>
-  <div id="scroll-progress"></div>
-  <div id="starfield"></div>
-  <div class="page-wrapper">
 
-    <!-- NAV -->
-    <nav class="main-nav">
-      <div class="nav-inner">
-        <a href="index.html" class="nav-logo">NEBULA<span>_PROTOCOL</span></a>
-        <ul class="nav-links">
-          <li><a href="index.html"        id="nav-home"><span class="material-icons">rocket_launch</span>Home</a></li>
-          <li><a href="projects.html"     id="nav-projects"><span class="material-icons">account_tree</span>Projects</a></li>
-          <li><a href="achievements.html" id="nav-wins"><span class="material-icons">military_tech</span>Wins</a></li>
-          <li><a href="contact.html"      id="nav-contact"><span class="material-icons">alternate_email</span>Connect</a></li>
-        </ul>
-        <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
-    </nav>
+<div id="bg-grid" aria-hidden="true"></div>
+<div class="orb orb-blue" aria-hidden="true"></div>
+<div class="orb orb-lime" aria-hidden="true"></div>
+<div id="scroll-progress"></div>
 
-    <!-- MOBILE NAV -->
-    <div class="mobile-nav" id="mobile-nav">
-      <a href="index.html"><span class="material-icons">rocket_launch</span>Home</a>
-      <a href="projects.html"><span class="material-icons">account_tree</span>Projects</a>
-      <a href="achievements.html"><span class="material-icons">military_tech</span>Wins</a>
-      <a href="contact.html"><span class="material-icons">alternate_email</span>Connect</a>
-    </div>
-
-    <main>
-      <!-- PAGE HEADER -->
-      <header class="page-header">
-        <div class="container">
-          <div class="section-label reveal">Project Nexus</div>
-          <h1 class="reveal delay-1">
-            AETHER<span class="gradient-text">_PORTFOLIO</span>
-          </h1>
-          <p class="text-muted reveal delay-2" style="margin-top:1rem;">
-            A collection of high-frequency solutions engineered across the digital void.
-            Each node represents a unique architectural challenge solved through celestial logic.
-          </p>
-        </div>
-      </header>
-
-      <section class="section" id="projects-list">
-        <div class="container">
-          <!-- Filter -->
-          <div class="filter-bar reveal">
-            <button class="filter-btn active" data-filter="all" id="filter-all">All Systems</button>
-            <button class="filter-btn" data-filter="web3"      id="filter-web3">Web3</button>
-            <button class="filter-btn" data-filter="ai"        id="filter-ai">AI / ML</button>
-            <button class="filter-btn" data-filter="systems"   id="filter-systems">Systems</button>
-            <button class="filter-btn" data-filter="ui"        id="filter-ui">UI / Design</button>
-          </div>
-
-          <!-- Project Grid -->
-          <div class="grid grid-2" id="project-grid">
-
-            <!-- NEBULA PROTOCOL -->
-            <article class="project-card reveal delay-1" data-tags="web3" id="project-nebula">
-              <span class="project-num">01 // Active Node</span>
-              <h3>NEBULA PROTOCOL</h3>
-              <p class="text-muted">
-                A decentralized liquidity layer designed for deep-space assets. Solved the "event horizon" problem
-                by implementing a custom gas-optimization algorithm that reduced transaction costs by 45% during
-                peak cluster load. Built with a modular React frontend and an immutable Solidity core.
-              </p>
-              <div class="project-tech">
-                <span class="tag">Solidity</span>
-                <span class="tag">React</span>
-                <span class="tag tag-cyan">DeFi</span>
-              </div>
-              <div class="project-links">
-                <a href="https://project-demo.vercel.app" target="_blank" class="btn btn-primary" id="nebula-demo" style="font-size:.75rem;padding:.45rem 1rem;">
-                  <span class="material-icons" style="font-size:.9rem;">rocket</span>Live Demo
-                </a>
-                <a href="https://github.com/username/nebula-protocol" target="_blank" class="btn btn-secondary" id="nebula-source" style="font-size:.75rem;padding:.45rem 1rem;">
-                  <span class="material-icons" style="font-size:.9rem;">code</span>Source
-                </a>
-              </div>
-            </article>
-
-            <!-- PULSE SENSOR -->
-            <article class="project-card reveal delay-2" data-tags="systems ai" id="project-pulse">
-              <span class="project-num">02 // Deployed</span>
-              <h3>PULSE SENSOR</h3>
-              <p class="text-muted">
-                Real-time telemetry monitoring for distributed microservices. Utilized Python and FastAPI
-                to ingest 10k signals/sec with sub-millisecond latency across orbital node clusters.
-              </p>
-              <div class="project-tech">
-                <span class="tag">Python</span>
-                <span class="tag">FastAPI</span>
-                <span class="tag tag-cyan">Real-time</span>
-              </div>
-              <div class="project-links">
-                <a href="https://pulse-sensor.vercel.app" target="_blank" class="btn btn-primary" id="pulse-demo" style="font-size:.75rem;padding:.45rem 1rem;">
-                  <span class="material-icons" style="font-size:.9rem;">rocket</span>Live Demo
-                </a>
-                <a href="https://github.com/username/pulse-sensor" target="_blank" class="btn btn-secondary" id="pulse-source" style="font-size:.75rem;padding:.45rem 1rem;">
-                  <span class="material-icons" style="font-size:.9rem;">code</span>Source
-                </a>
-              </div>
-            </article>
-
-            <!-- QUANTUM BRIDGE -->
-            <article class="project-card reveal delay-1" data-tags="web3" id="project-quantum">
-              <span class="project-num">03 // Active Node</span>
-              <h3>QUANTUM_BRIDGE</h3>
-              <p class="text-muted">
-                A cross-chain asset transfer protocol enabling seamless movement between disparate networks.
-                Implemented with Solidity and LayerZero for trustless, permissionless messaging.
-              </p>
-              <div class="project-tech">
-                <span class="tag">Solidity</span>
-                <span class="tag">LayerZero</span>
-                <span class="tag tag-cyan">Cross-chain</span>
-              </div>
-              <div class="project-links">
-                <a href="https://project.vercel.app" target="_blank" class="btn btn-primary" id="quantum-demo" style="font-size:.75rem;padding:.45rem 1rem;">
-                  <span class="material-icons" style="font-size:.9rem;">rocket</span>Live Demo
-                </a>
-                <a href="https://github.com/user/repo" target="_blank" class="btn btn-secondary" id="quantum-source" style="font-size:.75rem;padding:.45rem 1rem;">
-                  <span class="material-icons" style="font-size:.9rem;">code</span>Source
-                </a>
-              </div>
-            </article>
-
-            <!-- IRIS VISION -->
-            <article class="project-card reveal delay-2" data-tags="ai" id="project-iris">
-              <span class="project-num">04 // Deployed</span>
-              <h3>IRIS_VISION</h3>
-              <p class="text-muted">
-                Real-time computer vision system optimized for edge devices. Utilizes Python and PyTorch
-                for high-speed object detection and tracking in remote orbital environments.
-              </p>
-              <div class="project-tech">
-                <span class="tag">Python</span>
-                <span class="tag">PyTorch</span>
-                <span class="tag tag-cyan">Edge AI</span>
-              </div>
-              <div class="project-links">
-                <a href="https://project.vercel.app" target="_blank" class="btn btn-primary" id="iris-demo" style="font-size:.75rem;padding:.45rem 1rem;">
-                  <span class="material-icons" style="font-size:.9rem;">rocket</span>Live Demo
-                </a>
-                <a href="https://github.com/user/repo" target="_blank" class="btn btn-secondary" id="iris-source" style="font-size:.75rem;padding:.45rem 1rem;">
-                  <span class="material-icons" style="font-size:.9rem;">code</span>Source
-                </a>
-              </div>
-            </article>
-
-            <!-- VOID CORE V2 -->
-            <article class="project-card reveal delay-1" data-tags="systems" id="project-voidcore">
-              <span class="project-num">05 // Orbital</span>
-              <h3>VOID CORE V2</h3>
-              <p class="text-muted">
-                A kernel-level task scheduler optimized for high-concurrency environments. Re-engineered
-                the threading model using Rust to achieve zero-cost abstractions and memory safety
-                across orbital nodes.
-              </p>
-              <div class="project-tech">
-                <span class="tag">Rust</span>
-                <span class="tag">Systems</span>
-                <span class="tag tag-cyan">Low-latency</span>
-              </div>
-              <div class="project-links">
-                <a href="https://void-core.vercel.app" target="_blank" class="btn btn-primary" id="voidcore-demo" style="font-size:.75rem;padding:.45rem 1rem;">
-                  <span class="material-icons" style="font-size:.9rem;">rocket</span>Live Demo
-                </a>
-                <a href="https://github.com/username/void-core" target="_blank" class="btn btn-secondary" id="voidcore-source" style="font-size:.75rem;padding:.45rem 1rem;">
-                  <span class="material-icons" style="font-size:.9rem;">code</span>Source
-                </a>
-              </div>
-            </article>
-
-            <!-- SIGNAL MORPH -->
-            <article class="project-card reveal delay-2" data-tags="ai" id="project-signal">
-              <span class="project-num">06 // Beta</span>
-              <h3>SIGNAL_MORPH</h3>
-              <p class="text-muted">
-                Neural-link interface for converting brainwave data into executable shell commands
-                via low-latency AI inference. Built with Node.js and TensorFlow.
-              </p>
-              <div class="project-tech">
-                <span class="tag">Node.js</span>
-                <span class="tag">TensorFlow</span>
-                <span class="tag tag-cyan">Neural</span>
-              </div>
-              <div class="project-links">
-                <a href="https://project.vercel.app" target="_blank" class="btn btn-primary" id="signal-demo" style="font-size:.75rem;padding:.45rem 1rem;">
-                  <span class="material-icons" style="font-size:.9rem;">rocket</span>Live Demo
-                </a>
-                <a href="https://github.com/user/repo" target="_blank" class="btn btn-secondary" id="signal-source" style="font-size:.75rem;padding:.45rem 1rem;">
-                  <span class="material-icons" style="font-size:.9rem;">code</span>Source
-                </a>
-              </div>
-            </article>
-
-            <!-- FORGE OS -->
-            <article class="project-card reveal delay-1" data-tags="systems" id="project-forge">
-              <span class="project-num">07 // Experimental</span>
-              <h3>FORGE_OS</h3>
-              <p class="text-muted">
-                A modular operating system designed for decentralized computing architectures.
-                Developed with Rust and WebAssembly to provide a secure, portable, and extremely
-                low-overhead runtime for celestial nodes.
-              </p>
-              <div class="project-tech">
-                <span class="tag">Rust</span>
-                <span class="tag">WebAssembly</span>
-                <span class="tag tag-cyan">OS</span>
-              </div>
-              <div class="project-links">
-                <a href="https://project.vercel.app" target="_blank" class="btn btn-primary" id="forge-demo" style="font-size:.75rem;padding:.45rem 1rem;">
-                  <span class="material-icons" style="font-size:.9rem;">rocket</span>Live Demo
-                </a>
-                <a href="https://github.com/user/repo" target="_blank" class="btn btn-secondary" id="forge-source" style="font-size:.75rem;padding:.45rem 1rem;">
-                  <span class="material-icons" style="font-size:.9rem;">code</span>Source
-                </a>
-              </div>
-            </article>
-
-            <!-- ORBIT UI -->
-            <article class="project-card reveal delay-2" data-tags="ui" id="project-orbit">
-              <span class="project-num">08 // Released</span>
-              <h3>ORBIT_UI</h3>
-              <p class="text-muted">
-                A design system for space-faring applications. Implemented with Tailwind CSS
-                and Framer Motion for weightless, zero-gravity interactions.
-              </p>
-              <div class="project-tech">
-                <span class="tag">Tailwind</span>
-                <span class="tag">Framer Motion</span>
-                <span class="tag tag-cyan">Design System</span>
-              </div>
-              <div class="project-links">
-                <a href="https://project.vercel.app" target="_blank" class="btn btn-primary" id="orbit-demo" style="font-size:.75rem;padding:.45rem 1rem;">
-                  <span class="material-icons" style="font-size:.9rem;">rocket</span>Live Demo
-                </a>
-                <a href="https://github.com/user/repo" target="_blank" class="btn btn-secondary" id="orbit-source" style="font-size:.75rem;padding:.45rem 1rem;">
-                  <span class="material-icons" style="font-size:.9rem;">code</span>Source
-                </a>
-              </div>
-            </article>
-
-            <!-- VOID SHELL -->
-            <article class="project-card reveal delay-1" data-tags="ai systems" id="project-voidshell">
-              <span class="project-num">09 // Active Node</span>
-              <h3>VOID_SHELL</h3>
-              <p class="text-muted">
-                Custom bash-compatible shell featuring predictive command completion using local
-                Llama models for dev productivity. Achieving low-latency inference on orbital terminal clusters.
-              </p>
-              <div class="project-tech">
-                <span class="tag">Bash</span>
-                <span class="tag">Llama</span>
-                <span class="tag tag-cyan">CLI / AI</span>
-              </div>
-              <div class="project-links">
-                <a href="https://void-shell.vercel.app" target="_blank" class="btn btn-primary" id="voidshell-demo" style="font-size:.75rem;padding:.45rem 1rem;">
-                  <span class="material-icons" style="font-size:.9rem;">rocket</span>Live Demo
-                </a>
-                <a href="https://github.com/username/void-shell" target="_blank" class="btn btn-secondary" id="voidshell-source" style="font-size:.75rem;padding:.45rem 1rem;">
-                  <span class="material-icons" style="font-size:.9rem;">code</span>Source
-                </a>
-              </div>
-            </article>
-
-          </div><!-- /#project-grid -->
-        </div>
-      </section>
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="main-footer">
-      <div class="footer-inner">
-        <a href="index.html" class="nav-logo" style="font-size:1.1rem;">NEBULA<span>_PROTOCOL</span></a>
-        <ul class="footer-links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="projects.html">Projects</a></li>
-          <li><a href="achievements.html">Wins</a></li>
-          <li><a href="contact.html">Connect</a></li>
-        </ul>
-        <p class="footer-copy">© 2024 THE ETHEREAL OBSERVER // ENCRYPTED</p>
-      </div>
-    </footer>
+<nav class="main-nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">ROHAN<span>.DEV</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html" id="nav-home"><span class="material-icons">home</span>Home</a></li>
+      <li><a href="projects.html" id="nav-projects" class="active"><span class="material-icons">code</span>Projects</a></li>
+      <li><a href="achievements.html" id="nav-wins"><span class="material-icons">military_tech</span>Wins</a></li>
+      <li><a href="contact.html" id="nav-contact"><span class="material-icons">alternate_email</span>Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
   </div>
+</nav>
 
-  <script src="main.js"></script>
-  <script>
-    // Filter logic
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const cards      = document.querySelectorAll('#project-grid article[data-tags]');
+<div class="mobile-nav" id="mobile-nav">
+  <a href="index.html"><span class="material-icons">home</span>Home</a>
+  <a href="projects.html"><span class="material-icons">code</span>Projects</a>
+  <a href="achievements.html"><span class="material-icons">military_tech</span>Wins</a>
+  <a href="contact.html"><span class="material-icons">alternate_email</span>Contact</a>
+</div>
 
-    filterBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        filterBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const filter = btn.dataset.filter;
+<div class="page-wrapper">
+  <main>
+    <header class="page-header">
+      <div class="container">
+        <div class="section-label reveal">Project Portfolio</div>
+        <h1 class="reveal delay-1">Selected <span class="gradient-text">Work</span></h1>
+        <p class="text-muted reveal delay-2" style="margin-top:1rem;max-width:560px;">
+          A curated collection of AI systems, web applications, and engineering solutions — each built to solve real problems with precision and craft.
+        </p>
+      </div>
+    </header>
 
-        cards.forEach(card => {
-          const tags = card.dataset.tags || '';
-          if (filter === 'all' || tags.includes(filter)) {
-            card.style.display = '';
-            card.style.animation = 'fadeInUp .4s ease forwards';
-          } else {
-            card.style.display = 'none';
-          }
-        });
+    <section class="section" id="projects-list" style="padding-top:0;">
+      <div class="container">
+        <!-- Filter Bar -->
+        <div class="filter-bar reveal">
+          <button class="filter-btn active" data-filter="all" id="filter-all">All Projects</button>
+          <button class="filter-btn" data-filter="ai"      id="filter-ai">AI / ML</button>
+          <button class="filter-btn" data-filter="web"     id="filter-web">Web Dev</button>
+          <button class="filter-btn" data-filter="systems" id="filter-systems">Systems</button>
+          <button class="filter-btn" data-filter="web3"    id="filter-web3">Web3</button>
+        </div>
+
+        <!-- Project Grid -->
+        <div class="grid grid-2" id="project-grid">
+
+          <article class="project-card reveal delay-1" data-tags="web3" id="project-nebula">
+            <span class="project-num">01 // Active Node</span>
+            <h3>Nebula Protocol</h3>
+            <p class="text-muted">A decentralized liquidity layer for deep-space assets. Solved gas-optimization challenges, reducing transaction costs by 45% during peak load. Built with React frontend and immutable Solidity core.</p>
+            <div class="project-tech">
+              <span class="tag">Solidity</span>
+              <span class="tag">React</span>
+              <span class="tag tag-blue">DeFi</span>
+            </div>
+            <div class="project-links">
+              <a href="https://project-demo.vercel.app" target="_blank" class="btn btn-primary" id="nebula-demo" style="font-size:.8rem;padding:.45rem 1rem;">
+                <span class="material-icons" style="font-size:.9rem;">open_in_new</span>Live Demo
+              </a>
+              <a href="https://github.com" target="_blank" class="btn btn-secondary" id="nebula-source" style="font-size:.8rem;padding:.45rem 1rem;">
+                <span class="material-icons" style="font-size:.9rem;">code</span>Source
+              </a>
+            </div>
+          </article>
+
+          <article class="project-card reveal delay-2" data-tags="systems ai" id="project-pulse">
+            <span class="project-num">02 // Deployed</span>
+            <h3>Pulse Sensor</h3>
+            <p class="text-muted">Real-time telemetry monitoring for distributed microservices. Python and FastAPI ingest 10k signals/sec with sub-millisecond latency across orbital node clusters.</p>
+            <div class="project-tech">
+              <span class="tag">Python</span>
+              <span class="tag">FastAPI</span>
+              <span class="tag tag-lime">Real-time</span>
+            </div>
+            <div class="project-links">
+              <a href="https://pulse-sensor.vercel.app" target="_blank" class="btn btn-primary" id="pulse-demo" style="font-size:.8rem;padding:.45rem 1rem;">
+                <span class="material-icons" style="font-size:.9rem;">open_in_new</span>Live Demo
+              </a>
+              <a href="https://github.com" target="_blank" class="btn btn-secondary" id="pulse-source" style="font-size:.8rem;padding:.45rem 1rem;">
+                <span class="material-icons" style="font-size:.9rem;">code</span>Source
+              </a>
+            </div>
+          </article>
+
+          <article class="project-card reveal delay-1" data-tags="ai" id="project-langagent">
+            <span class="project-num">03 // Active Node</span>
+            <h3>LangChain Agent</h3>
+            <p class="text-muted">Autonomous AI agent built with LangChain and Ollama. Features tool use, memory persistence, and multi-step reasoning for complex information retrieval tasks.</p>
+            <div class="project-tech">
+              <span class="tag">Python</span>
+              <span class="tag">LangChain</span>
+              <span class="tag tag-lime">Agentic AI</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com" target="_blank" class="btn btn-primary" id="lang-demo" style="font-size:.8rem;padding:.45rem 1rem;">
+                <span class="material-icons" style="font-size:.9rem;">open_in_new</span>Live Demo
+              </a>
+              <a href="https://github.com" target="_blank" class="btn btn-secondary" id="lang-source" style="font-size:.8rem;padding:.45rem 1rem;">
+                <span class="material-icons" style="font-size:.9rem;">code</span>Source
+              </a>
+            </div>
+          </article>
+
+          <article class="project-card reveal delay-2" data-tags="ai" id="project-iris">
+            <span class="project-num">04 // Deployed</span>
+            <h3>IRIS Vision</h3>
+            <p class="text-muted">Real-time computer vision system optimized for edge devices. PyTorch-based high-speed object detection and tracking achieving 60fps on embedded hardware.</p>
+            <div class="project-tech">
+              <span class="tag">Python</span>
+              <span class="tag">PyTorch</span>
+              <span class="tag tag-blue">Edge AI</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com" target="_blank" class="btn btn-primary" id="iris-demo" style="font-size:.8rem;padding:.45rem 1rem;">
+                <span class="material-icons" style="font-size:.9rem;">open_in_new</span>Live Demo
+              </a>
+              <a href="https://github.com" target="_blank" class="btn btn-secondary" id="iris-source" style="font-size:.8rem;padding:.45rem 1rem;">
+                <span class="material-icons" style="font-size:.9rem;">code</span>Source
+              </a>
+            </div>
+          </article>
+
+          <article class="project-card reveal delay-1" data-tags="systems" id="project-voidcore">
+            <span class="project-num">05 // Orbital</span>
+            <h3>Void Core V2</h3>
+            <p class="text-muted">A kernel-level task scheduler optimized for high-concurrency environments. Re-engineered Rust threading model to achieve zero-cost abstractions and memory safety.</p>
+            <div class="project-tech">
+              <span class="tag">Rust</span>
+              <span class="tag">Systems</span>
+              <span class="tag tag-cyan">Low-latency</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com" target="_blank" class="btn btn-primary" id="voidcore-demo" style="font-size:.8rem;padding:.45rem 1rem;">
+                <span class="material-icons" style="font-size:.9rem;">open_in_new</span>Live Demo
+              </a>
+              <a href="https://github.com" target="_blank" class="btn btn-secondary" id="voidcore-source" style="font-size:.8rem;padding:.45rem 1rem;">
+                <span class="material-icons" style="font-size:.9rem;">code</span>Source
+              </a>
+            </div>
+          </article>
+
+          <article class="project-card reveal delay-2" data-tags="web" id="project-portfolio">
+            <span class="project-num">06 // Released</span>
+            <h3>Portfolio v2</h3>
+            <p class="text-muted">This portfolio — built from scratch with a custom "Neon Nocturne" design system. Pure HTML/CSS/JS with animated code cards, glassmorphic navigation, and reveal animations.</p>
+            <div class="project-tech">
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag tag-lime">Design System</span>
+            </div>
+            <div class="project-links">
+              <a href="index.html" class="btn btn-primary" id="portfolio-demo" style="font-size:.8rem;padding:.45rem 1rem;">
+                <span class="material-icons" style="font-size:.9rem;">open_in_new</span>Live Demo
+              </a>
+              <a href="https://github.com" target="_blank" class="btn btn-secondary" id="portfolio-source" style="font-size:.8rem;padding:.45rem 1rem;">
+                <span class="material-icons" style="font-size:.9rem;">code</span>Source
+              </a>
+            </div>
+          </article>
+
+          <article class="project-card reveal delay-1" data-tags="ai web" id="project-signal">
+            <span class="project-num">07 // Beta</span>
+            <h3>Signal Morph</h3>
+            <p class="text-muted">Neural-interface for converting audio signals into structured data outputs via AI inference. Built with Node.js and TensorFlow.js for browser-native ML inference.</p>
+            <div class="project-tech">
+              <span class="tag">Node.js</span>
+              <span class="tag">TensorFlow.js</span>
+              <span class="tag tag-blue">Neural</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com" target="_blank" class="btn btn-primary" id="signal-demo" style="font-size:.8rem;padding:.45rem 1rem;">
+                <span class="material-icons" style="font-size:.9rem;">open_in_new</span>Live Demo
+              </a>
+              <a href="https://github.com" target="_blank" class="btn btn-secondary" id="signal-source" style="font-size:.8rem;padding:.45rem 1rem;">
+                <span class="material-icons" style="font-size:.9rem;">code</span>Source
+              </a>
+            </div>
+          </article>
+
+          <article class="project-card reveal delay-2" data-tags="web3" id="project-quantum">
+            <span class="project-num">08 // Active</span>
+            <h3>Quantum Bridge</h3>
+            <p class="text-muted">Cross-chain asset transfer protocol enabling seamless movement between disparate networks. Implemented with Solidity and LayerZero for trustless, permissionless messaging.</p>
+            <div class="project-tech">
+              <span class="tag">Solidity</span>
+              <span class="tag">LayerZero</span>
+              <span class="tag tag-cyan">Cross-chain</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com" target="_blank" class="btn btn-primary" id="quantum-demo" style="font-size:.8rem;padding:.45rem 1rem;">
+                <span class="material-icons" style="font-size:.9rem;">open_in_new</span>Live Demo
+              </a>
+              <a href="https://github.com" target="_blank" class="btn btn-secondary" id="quantum-source" style="font-size:.8rem;padding:.45rem 1rem;">
+                <span class="material-icons" style="font-size:.9rem;">code</span>Source
+              </a>
+            </div>
+          </article>
+
+        </div><!-- /#project-grid -->
+      </div>
+    </section>
+  </main>
+
+  <footer class="main-footer">
+    <div class="footer-inner">
+      <a href="index.html" class="nav-logo" style="font-size:1rem;">ROHAN<span>.DEV</span></a>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="achievements.html">Wins</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <p class="footer-copy">© 2025 Rohan Halaj. All rights reserved.</p>
+    </div>
+  </footer>
+</div>
+
+<script src="main.js"></script>
+<script>
+  // Filter logic
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('#project-grid article[data-tags]');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      cards.forEach(card => {
+        const tags = card.dataset.tags || '';
+        if (filter === 'all' || tags.includes(filter)) {
+          card.style.display = '';
+          card.style.animation = 'fadeInUp .4s ease forwards';
+        } else {
+          card.style.display = 'none';
+        }
       });
     });
-  </script>
+  });
+</script>
 </body>
 </html>

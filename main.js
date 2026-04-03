@@ -1,190 +1,151 @@
-/* ============================================
-   main.js — Shared JS for Celestial Portfolio
-   ============================================ */
+/* ═══════════════════════════════════════════════════════════
+   main.js — Neon Nocturne Portfolio
+   Handles: Nav, Scroll Progress, Reveal Animations,
+            Counters, Hamburger Menu, Typewriter
+═══════════════════════════════════════════════════════════ */
 
-// ── Starfield ──────────────────────────────
-(function createStarfield() {
-  const canvas = document.getElementById('starfield');
-  if (!canvas) return;
+'use strict';
 
-  const stars = [];
-  const count = window.innerWidth < 600 ? 80 : 160;
+// ── Scroll Progress ──────────────────────────────────────────
+const progressBar = document.getElementById('scroll-progress');
+if (progressBar) {
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    progressBar.style.width = (max > 0 ? (scrolled / max) * 100 : 0) + '%';
+  }, { passive: true });
+}
 
-  for (let i = 0; i < count; i++) {
-    const star = document.createElement('div');
-    star.style.cssText = `
-      position: absolute;
-      border-radius: 50%;
-      background: #fff;
-      opacity: ${Math.random() * 0.6 + 0.1};
-      width: ${Math.random() * 2 + 1}px;
-      height: ${Math.random() * 2 + 1}px;
-      top: ${Math.random() * 100}%;
-      left: ${Math.random() * 100}%;
-      animation: twinkle ${Math.random() * 3 + 2}s ease-in-out infinite;
-      animation-delay: ${Math.random() * 3}s;
-    `;
-    canvas.appendChild(star);
-  }
-
-  // inject twinkle keyframes
-  const style = document.createElement('style');
-  style.textContent = `
-    @keyframes twinkle {
-      0%, 100% { opacity: 0.1; transform: scale(1); }
-      50%       { opacity: 0.8; transform: scale(1.4); }
-    }
-  `;
-  document.head.appendChild(style);
-})();
-
-// ── Scroll Progress Bar ────────────────────
-(function scrollProgress() {
-  const bar = document.getElementById('scroll-progress');
-  if (!bar) return;
-  const update = () => {
-    const scrolled = document.documentElement.scrollTop;
-    const total    = document.documentElement.scrollHeight - window.innerHeight;
-    bar.style.width = (scrolled / total * 100) + '%';
-  };
-  window.addEventListener('scroll', update, { passive: true });
-  update();
-})();
-
-// ── Mobile hamburger ───────────────────────
-(function mobileNav() {
-  const btn   = document.getElementById('hamburger');
-  const drawer = document.getElementById('mobile-nav');
-  if (!btn || !drawer) return;
-
-  btn.addEventListener('click', () => {
-    const open = btn.classList.toggle('open');
-    drawer.classList.toggle('open', open);
-    document.body.style.overflow = open ? 'hidden' : '';
+// ── Hamburger / Mobile Nav ────────────────────────────────────
+const hamburger = document.getElementById('hamburger');
+const mobileNav  = document.getElementById('mobile-nav');
+if (hamburger && mobileNav) {
+  hamburger.addEventListener('click', () => {
+    const isOpen = mobileNav.classList.toggle('open');
+    hamburger.classList.toggle('open', isOpen);
+    hamburger.setAttribute('aria-expanded', isOpen);
   });
-
-  // close on link click
-  drawer.querySelectorAll('a').forEach(a => {
+  // Close on link click
+  mobileNav.querySelectorAll('a').forEach(a => {
     a.addEventListener('click', () => {
-      btn.classList.remove('open');
-      drawer.classList.remove('open');
-      document.body.style.overflow = '';
+      mobileNav.classList.remove('open');
+      hamburger.classList.remove('open');
     });
   });
-})();
+}
 
-// ── Active nav link ────────────────────────
-(function setActiveLink() {
-  const path   = window.location.pathname.split('/').pop() || 'index.html';
-  const links  = document.querySelectorAll('.nav-links a, .mobile-nav a');
-  links.forEach(link => {
-    const href = link.getAttribute('href');
-    if (href && href.includes(path)) link.classList.add('active');
+// ── Highlight active nav link ─────────────────────────────────
+(function setActiveNav() {
+  const page = window.location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.nav-links a, .mobile-nav a').forEach(a => {
+    const href = a.getAttribute('href') || '';
+    if (href === page || (page === '' && href === 'index.html')) {
+      a.classList.add('active');
+    }
   });
 })();
 
-// ── Scroll-reveal animation ────────────────
-(function scrollReveal() {
-  const observer = new IntersectionObserver((entries) => {
+// ── Intersection Observer — Reveal ────────────────────────────
+const revealEls = document.querySelectorAll('.reveal');
+if (revealEls.length) {
+  const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('animate-fadeUp');
-        entry.target.style.opacity = '1';
-        observer.unobserve(entry.target);
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
-  document.querySelectorAll('.reveal').forEach(el => {
-    el.style.opacity = '0';
-    observer.observe(el);
-  });
-})();
-
-// ── Typing effect ──────────────────────────
-function typeEffect(el, text, speed = 55) {
-  if (!el) return;
-  el.textContent = '';
-  el.style.borderRight = '2px solid var(--secondary)';
-  let i = 0;
-  const t = setInterval(() => {
-    el.textContent += text[i++];
-    if (i >= text.length) {
-      clearInterval(t);
-      setTimeout(() => { el.style.borderRight = 'none'; }, 800);
-    }
-  }, speed);
+  revealEls.forEach(el => revealObserver.observe(el));
 }
 
-// ── Counter animation ──────────────────────
+// ── Animated Counters ─────────────────────────────────────────
 function animateCounter(el) {
   const target = parseInt(el.dataset.target, 10);
-  const dur = 1600;
-  const step = target / (dur / 16);
-  let cur = 0;
-  const t = setInterval(() => {
-    cur += step;
-    if (cur >= target) { el.textContent = target + (el.dataset.suffix || ''); clearInterval(t); return; }
-    el.textContent = Math.floor(cur) + (el.dataset.suffix || '');
-  }, 16);
+  const suffix = el.dataset.suffix || '';
+  const duration = 1600;
+  const step = duration / target;
+  let current = 0;
+  el.textContent = '0' + suffix;
+
+  const timer = setInterval(() => {
+    current += 1;
+    el.textContent = current + suffix;
+    if (current >= target) {
+      el.textContent = target + suffix;
+      clearInterval(timer);
+    }
+  }, step);
 }
 
-document.querySelectorAll('.counter').forEach(el => {
-  const obs = new IntersectionObserver(entries => {
-    if (entries[0].isIntersecting) { animateCounter(el); obs.disconnect(); }
-  }, { threshold: .5 });
-  obs.observe(el);
-});
-
-// ── Ripple on buttons ──────────────────────
-document.querySelectorAll('.btn').forEach(btn => {
-  btn.addEventListener('click', function(e) {
-    const ripple = document.createElement('span');
-    const rect   = this.getBoundingClientRect();
-    ripple.style.cssText = `
-      position: absolute; border-radius: 50%;
-      width: 120px; height: 120px;
-      left: ${e.clientX - rect.left - 60}px;
-      top:  ${e.clientY - rect.top  - 60}px;
-      background: rgba(255,255,255,.15);
-      pointer-events: none;
-      animation: ripple .6s ease-out forwards;
-    `;
-    this.style.position = 'relative';
-    this.style.overflow = 'hidden';
-    this.appendChild(ripple);
-    setTimeout(() => ripple.remove(), 700);
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      animateCounter(entry.target);
+      counterObserver.unobserve(entry.target);
+    }
   });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.counter[data-target]').forEach(el => {
+  counterObserver.observe(el);
 });
 
-const rippleStyle = document.createElement('style');
-rippleStyle.textContent = `
-  @keyframes ripple {
-    from { transform: scale(0); opacity: 1; }
-    to   { transform: scale(3); opacity: 0; }
+// ── Typewriter Effect (hero) ──────────────────────────────────
+const heroType = document.getElementById('hero-type');
+if (heroType) {
+  const lines = [
+    'Building autonomous AI agents & pipelines.',
+    'Crafting pixel-perfect web experiences.',
+    'Engineering real-time ML systems.',
+    'Turning bold ideas into shipped products.',
+  ];
+  let lineIdx = 0, charIdx = 0, deleting = false;
+  const cursor = document.createElement('span');
+  cursor.className = 'type-cursor';
+  heroType.appendChild(cursor);
+
+  function type() {
+    const current = lines[lineIdx];
+    if (!deleting) {
+      heroType.childNodes[0]
+        ? (heroType.childNodes[0].textContent = current.slice(0, charIdx + 1))
+        : heroType.insertBefore(document.createTextNode(current.slice(0, charIdx + 1)), cursor);
+      charIdx++;
+      if (charIdx === current.length) {
+        deleting = true;
+        setTimeout(type, 1800);
+        return;
+      }
+    } else {
+      if (heroType.childNodes[0]) {
+        heroType.childNodes[0].textContent = current.slice(0, charIdx - 1);
+      }
+      charIdx--;
+      if (charIdx === 0) {
+        deleting = false;
+        lineIdx = (lineIdx + 1) % lines.length;
+      }
+    }
+    setTimeout(type, deleting ? 38 : 62);
   }
-`;
-document.head.appendChild(rippleStyle);
 
-// ── Contact form simulation ────────────────
-const contactForm = document.getElementById('contact-form');
-if (contactForm) {
-  contactForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const btn = this.querySelector('button[type=submit]');
-    btn.textContent = 'Transmitting…';
-    btn.disabled = true;
-    setTimeout(() => {
-      btn.textContent = 'Signal Received ✓';
-      btn.style.background = 'linear-gradient(135deg, var(--secondary), var(--secondary-cont))';
-      btn.style.color = '#000';
-      this.reset();
-      setTimeout(() => {
-        btn.textContent = 'Send Transmission';
-        btn.style.background = '';
-        btn.style.color = '';
-        btn.disabled = false;
-      }, 3000);
-    }, 1800);
-  });
+  // Insert initial text node for cursor to follow
+  heroType.insertBefore(document.createTextNode(''), cursor);
+  setTimeout(type, 800);
+}
+
+// ── Smooth nav bg on scroll ───────────────────────────────────
+const mainNav = document.querySelector('.main-nav');
+if (mainNav) {
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) {
+      mainNav.style.background = 'rgba(19,19,19,0.92)';
+      mainNav.style.boxShadow = '0 1px 0 rgba(63,71,83,0.3)';
+    } else {
+      mainNav.style.background = 'rgba(53,53,53,0.4)';
+      mainNav.style.boxShadow = 'none';
+    }
+  }, { passive: true });
 }
