@@ -1,0 +1,426 @@
+/* ═══════════════════════════════════════════════════════
+   IF WISHES COULD KILL — Design System
+   Korean Psychological Drama Portfolio
+   ═══════════════════════════════════════════════════════ */
+
+/* ── CSS Custom Properties ─────────────────────────── */
+:root {
+  /* Core Palette */
+  --bg-void: #0a0a0a;
+  --bg-deep: #0d0d0d;
+  --bg-surface: #111111;
+  --bg-card: #161616;
+  --bg-elevated: #1a1a1a;
+
+  /* Red / Crimson Spectrum */
+  --crimson: #dc2626;
+  --crimson-deep: #991b1b;
+  --crimson-glow: #ef4444;
+  --crimson-dim: #7f1d1d;
+  --blood: #450a0a;
+
+  /* Purple Spectrum */
+  --purple: #9333ea;
+  --purple-deep: #6b21a8;
+  --purple-glow: #a855f7;
+  --purple-dim: #3b0764;
+
+  /* Neutrals */
+  --smoke: #a3a3a3;
+  --ash: #737373;
+  --fog: #525252;
+  --ghost: #e5e5e5;
+  --bone: #d4d4d4;
+
+  /* Accent */
+  --amber: #f59e0b;
+  --amber-dim: #92400e;
+
+  /* Typography */
+  --font-display: 'Bebas Neue', 'Impact', sans-serif;
+  --font-heading: 'Space Grotesk', 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Consolas', monospace;
+  --font-body: 'Space Grotesk', 'Segoe UI', sans-serif;
+
+  /* Spacing */
+  --section-gap: 8rem;
+
+  /* Transitions */
+  --ease-dramatic: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── Reset & Base ──────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  cursor: none;
+}
+
+body {
+  background: var(--bg-void);
+  color: var(--bone);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--crimson);
+  color: #fff;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  cursor: none;
+}
+
+button {
+  cursor: none;
+  font-family: var(--font-mono);
+}
+
+img { max-width: 100%; display: block; }
+
+/* ── Scrollbar ─────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-void); }
+::-webkit-scrollbar-thumb {
+  background: var(--crimson-dim);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--crimson); }
+
+/* ── Film Grain Overlay ────────────────────────────── */
+.film-grain {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  animation: grainShift 0.5s steps(5) infinite;
+}
+
+@keyframes grainShift {
+  0%, 100% { transform: translate(0, 0); }
+  20% { transform: translate(-2%, 3%); }
+  40% { transform: translate(3%, -1%); }
+  60% { transform: translate(-3%, 2%); }
+  80% { transform: translate(2%, -3%); }
+}
+
+/* ── Scanline Overlay ──────────────────────────────── */
+.scanlines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9998;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+}
+
+/* ── Vignette ──────────────────────────────────────── */
+.vignette {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9997;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 50%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+}
+
+/* ── Glitch Text Effect ────────────────────────────── */
+.glitch-text {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.glitch-text::before {
+  color: var(--crimson);
+  animation: glitchBefore 3s infinite linear alternate-reverse;
+  clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+}
+
+.glitch-text::after {
+  color: var(--purple);
+  animation: glitchAfter 2s infinite linear alternate-reverse;
+  clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+}
+
+@keyframes glitchBefore {
+  0% { transform: translate(0); }
+  20% { transform: translate(-3px, 2px); }
+  40% { transform: translate(3px, -1px); }
+  60% { transform: translate(-2px, 1px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
+}
+
+@keyframes glitchAfter {
+  0% { transform: translate(0); }
+  20% { transform: translate(2px, -2px); }
+  40% { transform: translate(-3px, 1px); }
+  60% { transform: translate(3px, 2px); }
+  80% { transform: translate(-1px, -1px); }
+  100% { transform: translate(0); }
+}
+
+/* ── Flicker Animation ─────────────────────────────── */
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  4% { opacity: 0.9; }
+  6% { opacity: 0.85; }
+  8% { opacity: 1; }
+  25% { opacity: 1; }
+  27% { opacity: 0.7; }
+  28% { opacity: 1; }
+  50% { opacity: 1; }
+  54% { opacity: 0.4; }
+  56% { opacity: 1; }
+  77% { opacity: 1; }
+  79% { opacity: 0.8; }
+  80% { opacity: 1; }
+}
+
+.flicker { animation: flicker 5s infinite; }
+
+/* ── Lightning Flash ──────────────────────────────── */
+@keyframes lightningFlash {
+  0% { opacity: 0; }
+  1% { opacity: 0.9; }
+  1.5% { opacity: 0; }
+  2% { opacity: 0.8; }
+  3% { opacity: 0; }
+  3.5% { opacity: 0.4; }
+  4% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+.lightning {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: white;
+  pointer-events: none;
+  z-index: 9995;
+  mix-blend-mode: overlay;
+  animation: lightningFlash 15s infinite;
+}
+
+/* ── Pulse Glow ────────────────────────────────────── */
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 10px rgba(220, 38, 38, 0.2); }
+  50% { box-shadow: 0 0 25px rgba(220, 38, 38, 0.5), 0 0 50px rgba(220, 38, 38, 0.2); }
+}
+
+@keyframes pulseGlowPurple {
+  0%, 100% { box-shadow: 0 0 10px rgba(147, 51, 234, 0.2); }
+  50% { box-shadow: 0 0 25px rgba(147, 51, 234, 0.5), 0 0 50px rgba(147, 51, 234, 0.2); }
+}
+
+/* ── Comic Layout ──────────────────────────────────── */
+.comic-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.comic-panel {
+  position: relative;
+  border: 1px solid rgba(220,38,38,0.2);
+  background: var(--bg-card);
+  overflow: hidden;
+  transition: all 0.4s var(--ease-dramatic);
+  cursor: none;
+}
+
+.comic-panel:hover {
+  border-color: var(--crimson);
+  box-shadow: 0 0 30px rgba(220,38,38,0.15);
+  transform: translateY(-2px);
+  z-index: 10;
+}
+
+.comic-panel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease-dramatic), filter 0.4s;
+  filter: grayscale(0.5) contrast(1.2);
+}
+
+.comic-panel:hover img {
+  transform: scale(1.05);
+  filter: grayscale(0) contrast(1.2);
+}
+
+.panel-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem 1.5rem 1rem 1.5rem;
+  background: linear-gradient(180deg, transparent, rgba(10,10,10,0.8) 40%, rgba(10,10,10,0.95) 100%);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--bone);
+  letter-spacing: 0.05em;
+  line-height: 1.6;
+}
+
+.comic-badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: var(--crimson);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  padding: 0.1rem 0.5rem;
+}
+
+.panel-1 { grid-column: span 12; aspect-ratio: 21/9; }
+.panel-2 { grid-column: span 5; aspect-ratio: 4/5; }
+.panel-3 { grid-column: span 7; aspect-ratio: 16/9; height: 100%; }
+.panel-4 { grid-column: span 6; aspect-ratio: 1/1; }
+.panel-5 { grid-column: span 6; aspect-ratio: 1/1; }
+.panel-6 { grid-column: span 12; aspect-ratio: 21/9; }
+.panel-6 img { object-position: center center; object-fit: contain; background-color: var(--bg-card); } /* Fix alignment for panel 6 */
+
+@media (max-width: 768px) {
+  .comic-grid { gap: 1rem; }
+  .panel-1, .panel-2, .panel-3, .panel-4, .panel-5, .panel-6 {
+    grid-column: span 12;
+    aspect-ratio: 16/9;
+  }
+}
+
+
+/* ── Float Animation ───────────────────────────────── */
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* ── Typing cursor ─────────────────────────────────── */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.typing-cursor::after {
+  content: '█';
+  animation: blink 1s steps(1) infinite;
+  color: var(--crimson);
+  margin-left: 2px;
+}
+
+/* ── Section Layout ────────────────────────────────── */
+.section {
+  padding: var(--section-gap) 2rem;
+  position: relative;
+}
+
+.section-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ── Section Header ────────────────────────────────── */
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--crimson);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.section-label::before {
+  content: '';
+  width: 20px;
+  height: 1px;
+  background: var(--crimson);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  color: #fff;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+/* ── Glass Card ────────────────────────────────────── */
+.glass-card {
+  background: rgba(22, 22, 22, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(220, 38, 38, 0.3), transparent);
+}
+
+/* ── Responsive ────────────────────────────────────── */
+@media (max-width: 768px) {
+  :root { --section-gap: 5rem; }
+  .section { padding: var(--section-gap) 1rem; }
+}
+
+@media (max-width: 480px) {
+  :root { --section-gap: 3.5rem; }
+}
