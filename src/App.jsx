@@ -28,15 +28,6 @@ function App() {
         transition: 'opacity 1s ease',
         pointerEvents: loaded ? 'auto' : 'none'
       }}>
-        {/* Camera Viewfinder Overlay */}
-        <div style={{ position: 'fixed', inset: '2rem', pointerEvents: 'none', zIndex: 9996 }}>
-          <div style={{ position: 'absolute', top: 0, left: 0, width: '40px', height: '40px', borderTop: '2px solid rgba(255,255,255,0.2)', borderLeft: '2px solid rgba(255,255,255,0.2)' }} />
-          <div style={{ position: 'absolute', top: 0, right: 0, width: '40px', height: '40px', borderTop: '2px solid rgba(255,255,255,0.2)', borderRight: '2px solid rgba(255,255,255,0.2)' }} />
-          <div style={{ position: 'absolute', bottom: 0, left: 0, width: '40px', height: '40px', borderBottom: '2px solid rgba(255,255,255,0.2)', borderLeft: '2px solid rgba(255,255,255,0.2)' }} />
-          <div style={{ position: 'absolute', bottom: 0, right: 0, width: '40px', height: '40px', borderBottom: '2px solid rgba(255,255,255,0.2)', borderRight: '2px solid rgba(255,255,255,0.2)' }} />
-          <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '20px', height: '2px', background: 'rgba(255,255,255,0.1)' }} />
-          <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '2px', height: '20px', background: 'rgba(255,255,255,0.1)' }} />
-        </div>
 
         <div className="lightning" />
         <div className="film-grain" />
