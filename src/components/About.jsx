@@ -113,7 +113,7 @@ const About = () => {
               className={`comic-panel ${panel.className}`}
               data-hover
             >
-              <img src={panel.img} alt={`Comic panel ${panel.id}`} />
+              <img src={panel.img} alt={`Comic panel ${panel.id}`} loading="lazy" decoding="async" />
               
               {panel.glitch && (
                 <div style={{
